@@ -5,7 +5,7 @@ import { basename as _basename, join } from 'path';
 import Sequelize from 'sequelize';
 var basename  = _basename(__filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/..\config\config.json')[env];
+var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
 if (config.use_env_variable) {
