@@ -67,8 +67,9 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             allowNull: true
         },
         requestedByUser_userID: {
-            type: Sequelize /*DataTypes*/.UUIDV4,
+            type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             allowNull: false,
+            defaultValue: Sequelize.UUIDV4,
             references: {
                 model: User,
                 key: /*"id"*/ "userID"
@@ -83,8 +84,9 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             }
         },
         requestAcceptedBy_userID: {
-            type: Sequelize /*DataTypes*/.UUIDV4,
+            type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             allowNull: true,
+            defaultValue: Sequelize.UUIDV4,
             references: {
                 model: User,
                 key: /*"id"*/ "userID"
@@ -100,13 +102,21 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
         }
     });
 
-    Request.associate = function(models) {
-        Request.belongsTo(models.User, {
-            foreignKey: {
-                allowNull: false
-            }
-        });
-    };
+    // Request.associate = function(models) {
+    //     Request.belongsTo(models.User, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
+
+    // Request.belongsToMany(User, {
+    //     through: {
+    //         model: User,
+    //         unique: true,
+    //     },
+    //     foreignKey: "userID"
+    // });
 
     return Request;
 };

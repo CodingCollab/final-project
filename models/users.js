@@ -1,5 +1,6 @@
 // import { compareSync, hashSync, genSaltSync } from "bcrypt";
 const bcrypt = require("bcrypt");
+const Request = require("./requests");
 'use strict'
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("User", {
@@ -17,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
             unique: true
         },
         userID: {
-            type: Sequelize.STRING,
+            type: Sequelize.CHAR(36),
             unique: true,
             allowNull: false,
             defaultValue: Sequelize.UUIDV4,
@@ -48,18 +49,26 @@ module.exports = (sequelize, Sequelize) => {
     });
 
     User.prototype.validPassword = function (userPass) {
-        return compareSync(userPass, this.userPass);
+        return bcrypt.compareSync(userPass, this.userPass);
     };
 
     User.hook("beforeCreate", function (user) {
-        user.userPass = hashSync(user.userPass, genSaltSync(10), null);
+        user.userPass = bcrypt.hashSync(user.userPass, bcrypt.genSaltSync(10), null);
     });
 
-    User.associate = function(models) {
-        User.hasMany(models.Request, {
-            onDelete: "cascade"
-        });
-    };
+    // User.associate = function(models) {
+        // User.hasMany(models.Request, {
+            // onDelete: "cascade"
+        // });
+    // };
+
+    // User.belongsToMany(Request, {
+    //     through: {
+    //         model: Request,
+    //         unique: false
+    //     },
+    //     foreignKey: "requestID"
+    // });
 
     return User;
 };
