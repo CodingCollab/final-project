@@ -21,4 +21,11 @@ router.delete("/api/job", (req, res) => {
     res.send(`${req.body} deleted`)
 })
 
+// test
+
+router.get("/", (req, res) => {
+    res.send("Test")
+});
+
+
 module.exports = router
