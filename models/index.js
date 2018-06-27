@@ -36,6 +36,8 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+db.user = sequelize.import(__dirname + "/users.js");
+db.request = sequelize.import(__dirname + "/requests.js");
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

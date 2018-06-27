@@ -5,11 +5,13 @@ const User = require("./users");
 module.exports = (sequelize, Sequelize /*DataTypes*/) => {
     const Request = sequelize.define("Requests", {
         requestID: {
-            type: Sequelize.STRING,
+            // type: Sequelize.STRING,
             // type: DataTypes.STRING,
+            type: Sequelize.CHAR(36),
             unique: true,
             allowNull: false,
-            defaultValue: Sequelize /*DataTypes*/.UUIDV4,
+            // defaultValue: Sequelize /*DataTypes*/.UUIDV4,
+            defaultValue: Sequelize.UUIDV4,
             primaryKey: true
         },
         requestName: {
@@ -25,18 +27,18 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
                 notEmpty: true
             }
         },
-        requestCreated: {
-            type: Sequelize.DATE,
-            // type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize /*DataTypes*/.NOW
-        },
-        requestUpdated: {
-            type: Sequelize.DATE,
-            // type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize /*DataTypes*/.NOW
-        },
+        // requestCreated: {
+        //     type: Sequelize.DATE,
+        //     // type: DataTypes.DATE,
+        //     allowNull: false,
+        //     defaultValue: Sequelize /*DataTypes*/.NOW
+        // },
+        // requestUpdated: {
+        //     type: Sequelize.DATE,
+        //     // type: DataTypes.DATE,
+        //     allowNull: false,
+        //     defaultValue: Sequelize /*DataTypes*/.NOW
+        // },
         requestOpen: {
             type: Sequelize.BOOLEAN,
             // type: DataTypes.BOOLEAN,
@@ -59,7 +61,8 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             type: Sequelize.DATE,
             // type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: Sequelize /*DataTypes*/.NOW
+            // defaultValue: Sequelize /*DataTypes*/.NOW
+            defaultValue: Sequelize.NOW
         },
         requestCompletedDate: {
             type: Sequelize.DATE,
@@ -67,38 +70,43 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             allowNull: true
         },
         requestedByUser_userID: {
-            type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
+            // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
+            type: Sequelize.CHAR(36),
             allowNull: false,
             defaultValue: Sequelize.UUIDV4,
-            references: {
-                model: User,
-                key: /*"id"*/ "userID"
-            }
+            // references: {
+            //     model: User,
+            //     // key: /*"id"*/ "userID"
+            //     key: "userID"
+            // }
         },
         requestedByUser_userName: {
-            type: Sequelize /*DataTypes*/.STRING,
+            // type: Sequelize /*DataTypes*/.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
-            references: {
-                model: User,
-                key: /*"id"*/ "userName"
-            }
+            // references: {
+            //     model: User,
+            //     key: /*"id"*/ "userName"
+            // }
         },
         requestAcceptedBy_userID: {
-            type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
+            // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
+            type: Sequelize.CHAR(36),
             allowNull: true,
             defaultValue: Sequelize.UUIDV4,
-            references: {
-                model: User,
-                key: /*"id"*/ "userID"
-            }
+            // references: {
+            //     model: User,
+            //     key: /*"id"*/ "userID"
+            // }
         },
         requestAcceptedBy_userName: {
-            type: Sequelize /*DataTypes*/.STRING,
+            // type: Sequelize /*DataTypes*/.STRING,
+            type: Sequelize.STRING,
             allowNull: true,
-            references: {
-                model: User,
-                key: /*"id"*/ "userName"
-            }
+            // references: {
+            //     model: User,
+            //     key: /*"id"*/ "userName"
+            // }
         }
     });
 

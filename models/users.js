@@ -1,7 +1,9 @@
+'Use Strict'
 // import { compareSync, hashSync, genSaltSync } from "bcrypt";
+
 const bcrypt = require("bcrypt");
 const Request = require("./requests");
-'use strict'
+const UserRequests = require("./userRequests");
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("User", {
         firstName: {
@@ -36,16 +38,16 @@ module.exports = (sequelize, Sequelize) => {
                 isEmail: true
             }
         },
-        created: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-        },
-        updated: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-        }
+        // created: {
+        //     type: Sequelize.DATE,
+        //     allowNull: false,
+        //     defaultValue: Sequelize.NOW
+        // },
+        // updated: {
+        //     type: Sequelize.DATE,
+        //     allowNull: false,
+        //     defaultValue: Sequelize.NOW
+        // }
     });
 
     User.prototype.validPassword = function (userPass) {
@@ -64,10 +66,10 @@ module.exports = (sequelize, Sequelize) => {
 
     // User.belongsToMany(Request, {
     //     through: {
-    //         model: Request,
+    //         model: /*Request*/ UserRequests,
     //         unique: false
     //     },
-    //     foreignKey: "requestID"
+    //     foreignKey: "request_id" //"requestID"
     // });
 
     return User;
