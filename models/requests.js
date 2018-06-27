@@ -73,7 +73,7 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             type: Sequelize.CHAR(36),
             allowNull: false,
-            defaultValue: Sequelize.UUIDV4,
+            defaultValue: Sequelize.UUIDV4 //,
             // references: {
             //     model: User,
             //     // key: /*"id"*/ "userID"
@@ -83,7 +83,7 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
         requestedByUser_userName: {
             // type: Sequelize /*DataTypes*/.STRING,
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: false //,
             // references: {
             //     model: User,
             //     key: /*"id"*/ "userName"
@@ -93,7 +93,7 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             type: Sequelize.CHAR(36),
             allowNull: true,
-            defaultValue: Sequelize.UUIDV4,
+            defaultValue: Sequelize.UUIDV4 //,
             // references: {
             //     model: User,
             //     key: /*"id"*/ "userID"
@@ -102,7 +102,7 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
         requestAcceptedBy_userName: {
             // type: Sequelize /*DataTypes*/.STRING,
             type: Sequelize.STRING,
-            allowNull: true,
+            allowNull: true //,
             // references: {
             //     model: User,
             //     key: /*"id"*/ "userName"
