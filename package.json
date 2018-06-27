@@ -38,5 +38,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodingCollab/final-project.git"
+  },
+  "peerDependencies": {
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
