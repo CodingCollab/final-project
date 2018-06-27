@@ -73,4 +73,4 @@ typings/
 .env.test.local
 .env.production.local
 
-config/config.json
+/config/config.json
