@@ -11,7 +11,7 @@ app.use(parser.json());
 app.use("/", routes);
 
 db.sequelize.sync().then(function() {
-    app.listen(port, () => {
+    app.listen(PORT, () => {
         console.log(`listening on ${PORT}`);
     });
 });
