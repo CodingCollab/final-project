@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 
 const App = () => [
     <Header />,
-    <div></div>,
     <Footer />    
 ];
 

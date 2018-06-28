@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "coding-collab-dev",
-    "password": null,
+    "username": "root",
+    "password": "letmein1",
     "database": "coding_collab_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
