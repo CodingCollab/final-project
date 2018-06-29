@@ -59,3 +59,29 @@ CREATE TABLE `requests` (
   CONSTRAINT `RequestedUserID - userrequests` FOREIGN KEY (`requestedByUser_userID`) REFERENCES `userrequests` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `RequestedUserName - userrequests` FOREIGN KEY (`requestedByUser_userName`) REFERENCES `userrequests` (`user_name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `languages` (
+	`langID` int(11) NOT NULL AUTO_INCREMENT,
+    `langName` varchar(255) NOT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`langID`),
+    UNIQUE KEY `langID` (`langID`),
+    UNIQUE KEY `langName` (`langName`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `requestlanguages` (
+	`request_lang_id` int(11) NOT NULL AUTO_INCREMENT,
+    `req_id` char(36) DEFAULT NULL,
+    `lang_id` int(11) DEFAULT NULL,
+    `lang_name` varchar(255) DEFAULT NULL,
+    `createdAt` datetime NOT NULL,
+    `updatedAt` datetime NOT NULL,
+    PRIMARY KEY (`request_lang_id`),
+    KEY `Request ID - requests_idx` (`req_id`),
+    KEY `Language ID - languages_idx` (`lang_id`),
+    KEY `Language Name - languages_idx` (`lang_name`),
+    CONSTRAINT `ReqID - requests` FOREIGN KEY (`req_id`) REFERENCES `requests` (`requestID`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `LangID - languages` FOREIGN KEY (`lang_id`) REFERENCES `languages` (`langID`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `LangName - languages` FOREIGN KEY (`lang_name`) REFERENCES `languages` (`langName`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
