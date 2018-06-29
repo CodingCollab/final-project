@@ -1,7 +1,7 @@
 'use strict'
 
-// const User = require("./users");
-// const Request = require("./requests");
+const User = require("./users");
+const Request = require("./requests");
 
 module.exports = (sequelize, Sequelize) => {
     const UserRequests = sequelize.define("UserRequests", {
@@ -25,21 +25,21 @@ module.exports = (sequelize, Sequelize) => {
     });
     return UserRequests;
 
-    User.belongsToMany(Request, {
-        through: {
-            model: /*Request*/ UserRequests,
-            unique: false
-        },
-        foreignKey: "request_ID"
-    });
+    // User.belongsToMany(Request, {
+    //     through: {
+    //         model: /*Request*/ UserRequests,
+    //         unique: false
+    //     },
+    //     foreignKey: "request_ID"
+    // });
 
-    Request.belongsToMany(User, {
-        through: {
-            model: /*User*/ UserRequests,
-            unique: false,
-        },
-        foreignKey: "user_ID"
-    });
+    // Request.belongsToMany(User, {
+    //     through: {
+    //         model: /*User*/ UserRequests,
+    //         unique: false,
+    //     },
+    //     foreignKey: "user_ID"
+    // });
 
     // return UserRequests;
 };

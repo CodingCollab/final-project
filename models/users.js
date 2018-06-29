@@ -38,16 +38,6 @@ module.exports = (sequelize, Sequelize) => {
                 isEmail: true
             }
         },
-        // created: {
-        //     type: Sequelize.DATE,
-        //     allowNull: false,
-        //     defaultValue: Sequelize.NOW
-        // },
-        // updated: {
-        //     type: Sequelize.DATE,
-        //     allowNull: false,
-        //     defaultValue: Sequelize.NOW
-        // }
     });
 
     User.prototype.validPassword = function (userPass) {

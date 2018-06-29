@@ -1,76 +1,53 @@
 // import { Module } from "module";
 'use strict'
 const User = require("./users");
+const UserRequest = require("./userRequests");
 
-module.exports = (sequelize, Sequelize /*DataTypes*/) => {
+module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define("Requests", {
         requestID: {
-            // type: Sequelize.STRING,
-            // type: DataTypes.STRING,
             type: Sequelize.CHAR(36),
             unique: true,
             allowNull: false,
-            // defaultValue: Sequelize /*DataTypes*/.UUIDV4,
             defaultValue: Sequelize.UUIDV4,
             primaryKey: true
         },
         requestName: {
             type: Sequelize.STRING,
-            // type: DataTypes.STRING,
             allowNull: false
         },
         requestContent: {
             type: Sequelize.TEXT,
-            // type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notEmpty: true
             }
         },
-        // requestCreated: {
-        //     type: Sequelize.DATE,
-        //     // type: DataTypes.DATE,
-        //     allowNull: false,
-        //     defaultValue: Sequelize /*DataTypes*/.NOW
-        // },
-        // requestUpdated: {
-        //     type: Sequelize.DATE,
-        //     // type: DataTypes.DATE,
-        //     allowNull: false,
-        //     defaultValue: Sequelize /*DataTypes*/.NOW
-        // },
         requestOpen: {
             type: Sequelize.BOOLEAN,
-            // type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0
         },
         requestCompleted: {
             type: Sequelize.BOOLEAN,
-            // type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: 0
         },
         requestPrice: {
             type: Sequelize.DECIMAL(10,2),
-            // type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             defaultValue: 20.00
         },
         requestDueDate: {
             type: Sequelize.DATE,
-            // type: DataTypes.DATE,
             allowNull: false,
-            // defaultValue: Sequelize /*DataTypes*/.NOW
             defaultValue: Sequelize.NOW
         },
         requestCompletedDate: {
             type: Sequelize.DATE,
-            // type: DataTypes.DATE,
             allowNull: true
         },
         requestedByUser_userID: {
-            // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             type: Sequelize.CHAR(36),
             allowNull: false,
             defaultValue: Sequelize.UUIDV4 //,
@@ -81,7 +58,6 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             // }
         },
         requestedByUser_userName: {
-            // type: Sequelize /*DataTypes*/.STRING,
             type: Sequelize.STRING,
             allowNull: false //,
             // references: {
@@ -90,7 +66,6 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             // }
         },
         requestAcceptedBy_userID: {
-            // type: Sequelize /*DataTypes*/./*UUIDV4*/CHAR(36),
             type: Sequelize.CHAR(36),
             allowNull: true,
             defaultValue: Sequelize.UUIDV4 //,
@@ -100,7 +75,6 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
             // }
         },
         requestAcceptedBy_userName: {
-            // type: Sequelize /*DataTypes*/.STRING,
             type: Sequelize.STRING,
             allowNull: true //,
             // references: {
@@ -128,6 +102,3 @@ module.exports = (sequelize, Sequelize /*DataTypes*/) => {
 
     return Request;
 };
-
-// export default Requests;
-// module.exports = Requests;
