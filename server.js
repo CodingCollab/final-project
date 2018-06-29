@@ -4,13 +4,8 @@ const parser = require ("body-parser");
 const db = require("./models"); //.default;
 const path = require("path")
 
-<<<<<<< HEAD
 const routes = require ("./routes");
 const PORT = process.env.port || 3001;
-=======
-const routes = require ("./routes")
-const PORT = process.env.port || 3001
->>>>>>> kevin
 
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
