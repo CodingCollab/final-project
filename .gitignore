@@ -74,3 +74,8 @@ typings/
 .env.production.local
 
 /config/config.json
+config/config.json
+/../congig.json
+config.json
+*/config.json
+db/schema.1.sql.backup
