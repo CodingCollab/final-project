@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'Use Strict'
 // import { compareSync, hashSync, genSaltSync } from "bcrypt";
 
@@ -76,3 +77,5 @@ module.exports = (sequelize, Sequelize) => {
 };
 
 // export default User;
+=======
+>>>>>>> kevin

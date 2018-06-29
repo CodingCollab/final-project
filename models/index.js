@@ -1,5 +1,6 @@
 'use strict';
 
+<<<<<<< HEAD
 // import { readdirSync } from 'fs';
 var fs = require('fs');
 // import { basename as _basename, join } from 'path';
@@ -11,6 +12,15 @@ var basename = path.basename(__filename);
 var env = process.env.NODE_ENV || 'development';
 var config = require(__dirname + '/../config/config.json')[env];
 var db = {};
+=======
+var fs        = require('fs');
+var path      = require('path');
+var Sequelize = require('sequelize');
+var basename  = path.basename(__filename);
+var env       = process.env.NODE_ENV || 'development';
+var config    = require(__dirname + '/..\config\config.json')[env];
+var db        = {};
+>>>>>>> kevin
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -18,15 +28,22 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+<<<<<<< HEAD
 // readdirSync(__dirname)
+=======
+>>>>>>> kevin
 fs
   .readdirSync(__dirname)
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
+<<<<<<< HEAD
     // var model = sequelize['import'](join(__dirname, file));
     var model = sequelize['import'](path.join(__dirname, file)); 
+=======
+    var model = sequelize['import'](path.join(__dirname, file));
+>>>>>>> kevin
     db[model.name] = model;
   });
 
@@ -41,5 +58,9 @@ db.request = sequelize.import(__dirname + "/requests.js");
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+<<<<<<< HEAD
 // export default db;
 module.exports = db; 
+=======
+module.exports = db;
+>>>>>>> kevin

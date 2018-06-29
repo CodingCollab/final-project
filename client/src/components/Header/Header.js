@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { navbar} from "reactstrap";
-// import "./Homepage.css";
 
 class Header extends Component {
     render () {
