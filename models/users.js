@@ -64,3 +64,5 @@ module.exports = (sequelize, Sequelize) => {
 
     return User;
 };
+
+// export default User;
