@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./NewRequestForm.css";
-import "react-day-picker/lib/style.css";
-import DayPickerInput from "react-day-picker"
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
 
 class NewRequestForm extends Component {
   // Setting the component's initial state
@@ -10,29 +10,42 @@ class NewRequestForm extends Component {
     requestName: "",
     requestContent: "",
     requestPrice: "",
-    requestDueDate: ""
+    selectedDay: undefined
   };
 
   // setting an undefined date and handler to change it
   constructor(props) {
     super(props);
     this.handleDayChange = this.handleDayChange.bind(this);
-    this.state = {
-      selectedDay: undefined,
-    };
   }
   handleDayChange(day) {
+    console.log('father son and holy spirit ', day)
     this.setState({ selectedDay: day });
   }
 
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    let value = event.target.value;
+    const name = event.target.name;
+
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+  };
+
   handleFormSubmit = event => {
+
+    event.preventDefault()
+    // logic
+    console.log(this.state)
 
     this.setState({
       userName: "",
       requestName: "",
       requestContent: "",
       requestPrice: "",
-      requestDueDate: ""  
+      selectedDay: undefined
     });
   };
 
@@ -40,7 +53,7 @@ class NewRequestForm extends Component {
 
   render() {
     //setting the day on the date picker calendar to today's date
-    const { selectedDay } = this.state;
+    const { selectedDay } = this.state ;
     return (
       <div>
         <p>
@@ -55,7 +68,7 @@ class NewRequestForm extends Component {
             placeholder="User Name"
           />
           <input
-            value={this.state.lastName}
+            value={this.state.requestName}
             name="requestName"
             onChange={this.handleInputChange}
             type="text"
