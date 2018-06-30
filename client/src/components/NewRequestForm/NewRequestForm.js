@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./NewRequestForm.css";
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
 
 class NewRequestForm extends Component {
   // Setting the component's initial state
@@ -8,50 +10,50 @@ class NewRequestForm extends Component {
     requestName: "",
     requestContent: "",
     requestPrice: "",
-    requestDueDate: ""
+    requestDueDate: undefined
   };
 
-  // determine what validation is necessary 
+  // setting an undefined date and handler to change it
+  constructor(props) {
+    super(props);
+    this.handleDayChange = this.handleDayChange.bind(this);
+  }
+  handleDayChange(day) {
+    console.log('father son and holy spirit ', day)
+    this.setState({ requestDueDate: day });
+  }
 
-  // handleInputChange = event => {
-  //   // Getting the value and name of the input which triggered the change
-  //   let value = event.target.value;
-  //   const name = event.target.name;
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    let value = event.target.value;
+    const name = event.target.name;
 
-  //   if (name === "password") {
-  //     value = value.substring(0, 15);
-  //   }
-  //   // Updating the input's state
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+  };
 
   handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    // event.preventDefault();
-    // if (!this.state.firstName || !this.state.lastName) {
-    //   alert("Fill out your first and last name please!");
-    // } else if (this.state.password.length < 6) {
-    //   alert(
-    //     `Choose a more secure password ${this.state.firstName} ${this.state
-    //       .lastName}`
-    //   );
-    // } else {
-    //   alert(`Hello ${this.state.firstName} ${this.state.lastName}`);
-    // }
+
+    event.preventDefault()
+    // logic
+    console.log(this.state)
 
     this.setState({
       userName: "",
       requestName: "",
       requestContent: "",
       requestPrice: "",
-      requestDueDate: ""  
+      requestDueDate: undefined
     });
   };
 
+  // begining the form
+
   render() {
-    // Notice how each input has a `value`, `name`, and `onChange` prop
+    //setting the day on the date picker calendar to today's date
+    const { requestDueDate } = this.state ;
     return (
       <div>
         <p>
@@ -66,7 +68,7 @@ class NewRequestForm extends Component {
             placeholder="User Name"
           />
           <input
-            value={this.state.lastName}
+            value={this.state.requestName}
             name="requestName"
             onChange={this.handleInputChange}
             type="text"
@@ -86,13 +88,12 @@ class NewRequestForm extends Component {
             type="text"
             placeholder="How much is this worth to you?"
           />
-          <input
-            value={this.state.requestDueDate}
-            name="requestDueDate"
-            onChange={this.handleDueDate}
-            type="text"
-            placeholder="When do you need this by?"
-          />
+         {/* enter the calendar element */}
+         <div>
+          {requestDueDate && <p>Day: {requestDueDate.toLocaleDateString()}</p>}
+          {!requestDueDate && <p>Choose a day</p>}
+          <DayPickerInput onDayChange={this.handleDayChange} />
+         </div>
           <button onClick={this.handleFormSubmit}>Submit</button>
         </form>
       </div>
