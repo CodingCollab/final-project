@@ -21,11 +21,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: true,
             defaultValue: null
-        },
-        lang_name: {
-            type: Sequelize.STRING,
-            allowNull: true,
-            defaultValue: null
+        // },
+
+        // Removing to limit overlapping duplication
+        // lang_name: {
+            // type: Sequelize.STRING,
+            // allowNull: true,
+            // defaultValue: null
         }
     });
 
