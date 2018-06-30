@@ -7,8 +7,8 @@
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.6.tgz#3e02972728c69248c2af08d60a48cbb8680fffdf"
 
 "@types/node@*":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.0.tgz#f5b61395c09b47ac46aaa1452750c9a72b3d3673"
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.1.tgz#d578446f4abff5c0b49ade9b4e5274f6badaadfc"
 
 abbrev@1:
   version "1.1.1"
@@ -1737,6 +1737,12 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-day-picker@^7.1.9:
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-7.1.9.tgz#04b0d956faf1bf85bb6ec6f9ca7966433be13f36"
+  dependencies:
+    prop-types "^15.6.1"
 
 react-dom@^16.4.1:
   version "16.4.1"
