@@ -1,9 +1,20 @@
 const express = require ("express");
 const router = express.Router();
+const db = require("../models")
 
 // create
-router.post("/api/job", (req, res) => {
-    res.json(req.body.name)
+router.post("/api/posts", (req, res) => {
+    console.log(req.body)
+    db.Post.create({
+        userName: req.body.userName,
+        requestName: req.body.requestName,
+        requestContent: req.body.requestContent,
+        requestPrice: req.body.requestPrice,
+        requestDueDate: req.body.requestDueDate
+    })
+        .then(function(dbPost){
+            res.json(dbPost)
+        });
 });
 
 // read
