@@ -48,6 +48,7 @@ module.exports = (sequelize, Sequelize) => {
         user.userPass = bcrypt.hashSync(user.userPass, bcrypt.genSaltSync(10), null);
     });
 
+    // Commented out while trying to get correct sequilize recognition of associations
     // User.associate = function(models) {
         // User.hasMany(models.Request, {
             // onDelete: "cascade"

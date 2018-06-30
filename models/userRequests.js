@@ -1,3 +1,5 @@
+// Likely removing this table completely as it is now likely redundant
+
 'use strict'
 
 const User = require("./users");
@@ -15,9 +17,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.CHAR(36),
             defaultValue: Sequelize.UUIDV4
         },
-        user_name: {
-            type: Sequelize.STRING
-        },
+
+        // Removing to limit overlapping duplication
+        // user_name: {
+            // type: Sequelize.STRING
+        // },
         request_id: {
             type: Sequelize.CHAR(36),
             defaultValue: Sequelize.UUIDV4
@@ -25,6 +29,7 @@ module.exports = (sequelize, Sequelize) => {
     });
     return UserRequests;
 
+    // Commented out while trying to get correct sequilize recognition of associations
     // User.belongsToMany(Request, {
     //     through: {
     //         model: /*Request*/ UserRequests,
