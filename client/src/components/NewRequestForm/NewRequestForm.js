@@ -10,7 +10,7 @@ class NewRequestForm extends Component {
     requestName: "",
     requestContent: "",
     requestPrice: "",
-    selectedDay: undefined
+    requestDueDate: undefined
   };
 
   // setting an undefined date and handler to change it
@@ -20,7 +20,7 @@ class NewRequestForm extends Component {
   }
   handleDayChange(day) {
     console.log('father son and holy spirit ', day)
-    this.setState({ selectedDay: day });
+    this.setState({ requestDueDate: day });
   }
 
   handleInputChange = event => {
@@ -45,7 +45,7 @@ class NewRequestForm extends Component {
       requestName: "",
       requestContent: "",
       requestPrice: "",
-      selectedDay: undefined
+      requestDueDate: undefined
     });
   };
 
@@ -53,7 +53,7 @@ class NewRequestForm extends Component {
 
   render() {
     //setting the day on the date picker calendar to today's date
-    const { selectedDay } = this.state ;
+    const { requestDueDate } = this.state ;
     return (
       <div>
         <p>
@@ -90,8 +90,8 @@ class NewRequestForm extends Component {
           />
          {/* enter the calendar element */}
          <div>
-          {selectedDay && <p>Day: {selectedDay.toLocaleDateString()}</p>}
-          {!selectedDay && <p>Choose a day</p>}
+          {requestDueDate && <p>Day: {requestDueDate.toLocaleDateString()}</p>}
+          {!requestDueDate && <p>Choose a day</p>}
           <DayPickerInput onDayChange={this.handleDayChange} />
          </div>
           <button onClick={this.handleFormSubmit}>Submit</button>
