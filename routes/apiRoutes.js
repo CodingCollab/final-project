@@ -1,4 +1,4 @@
-// Last Update by Kevin Glasow on 06/30/2018
+// Last Update by Kevin Glasow on 07/01/2018
 
 // *********************************************************************************
 // apiRoutes.js - contains routes to retrieve data from and update the database
@@ -40,29 +40,74 @@ router.get("/api/posts", (req, res) => {
         });
 });
 
-// Route to get all postings belonging to a particular language
-// TBD
+// Route to get all postings belonging to a particular language and sort by due date
+// TODO - CONFIRM WITH LAWRENCE THAT SEARCHING FOR lang_id WILL RETURN RESULTS WITH THAT LANGUAGE
+// TODO - CREATE SORT BY DUE DATE FEATURE
+router.get("/api/posts/language/:language", function (req, res) {
+    db.Post.findAll({
+            where: {
+                language: req.params.lang_id
+            }
+        })
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
+});
 
-// Route to get all postings by a specific user
-// TBD
+// Route to get all postings by a specific user and sort by due date
+// TODO - CREATE SORT BY DUE DATE FEATURE
+router.get("/api/posts/user/:user", function (req, res) {
+    db.Post.findAll({
+            where: {
+                user: req.params.userID
+            }
+        })
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
+});
 
 // Route to get one specific post by ID
-// TBD
+router.get("/api/posts/:requestID", function (req, res) {
+    db.Post.findOne({
+            where: {
+                requestID: req.params.requestID
+            }
+        })
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
+});
 
 // UPDATE ROUTES
 // =============================================================
 
 // Route to select post by ID and submit an update
-router.put("/api/job", (req, res) => {
-    res.send(`changing ${req.body.was} to ${req.body.is}`)
-})
+router.put("/api/posts", function (req, res) {
+    db.Post.update(req.body, {
+            where: {
+                requestID: req.body.requestID
+            }
+        })
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
+});
+
 
 // DELETE ROUTES
 // =============================================================
 
-// Route to select and delete a post by ID
-router.delete("/api/job", (req, res) => {
-    res.send(`${req.body} deleted`)
-})
+// Route to select and delete a post by requestID
+app.delete("/api/posts/:requestID", function(req, res) {
+    db.Post.destroy({
+      where: {
+        requestID: req.params.requestID
+      }
+    })
+      .then(function(dbPost) {
+        res.json(dbPost);
+      });
+  });
 
 module.exports = router
