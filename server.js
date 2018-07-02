@@ -3,6 +3,7 @@ const app = express();
 const parser = require ("body-parser");
 const db = require("./models"); //.default;
 const path = require("path")
+const env = require("if-env").load();
 
 const routes = require ("./routes");
 const PORT = process.env.port || 3001;

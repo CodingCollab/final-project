@@ -82,3 +82,8 @@ db/schema.1.sql.backup
 
 *.bak
 *.backup
+
+# local Lawrence temp files and backups
+*v2.sql
+*.~
+~*
