@@ -1,4 +1,4 @@
-const fs = require("fs");
+require('dotenv').config();
 
 module.exports = {
   development: {
@@ -6,14 +6,14 @@ module.exports = {
     password: process.env.DEV_DB_PASSWORD,
     database: process.env.DEV_DB_NAME,
     host: process.env.DEV_DB_HOSTNAME,
-    dialect: process.env.DEV_DB_DIALECT
+    dialect: "mysql"
   },
   test: {
     username: process.env.TEST_DB_USERNAME,
     password: process.env.TEST_DB_PASSWORD,
     database: process.env.TEST_DB_NAME,
     host: process.env.TEST_DB_HOSTNAME,
-    dialect: process.env.TEST_DB_DIALECT
+    dialect: "mysql"
   },
   production: {
     use_env_variable: "JAWSDB_URL",

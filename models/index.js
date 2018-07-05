@@ -5,7 +5,7 @@ var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 var env = process.env.NODE_ENV || 'development';
-var config = require(__dirname + '/../config/config.json')[env];
+var config = require(__dirname + '/../config/config.js')[env];
 var db = {};
 
 if (config.use_env_variable) {
@@ -32,7 +32,10 @@ Object.keys(db).forEach(modelName => {
 
 db.user = sequelize.import(__dirname + "/users.js");
 db.request = sequelize.import(__dirname + "/requests.js");
-db.userrequest = sequelize.import(__dirname + "/userrequests.js");
+db.acceptedBy = sequelize.import(__dirname + "/acceptedBy.js");
+db.languages = sequelize.import(__dirname + "/languages.js");
+db.requestedBy = sequelize.import(__dirname + "/requestedBy.js");
+db.requestLanguages = sequelize.import(__dirname + "/requestLanguages.js");
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
