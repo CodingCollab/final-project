@@ -99,7 +99,7 @@ router.put("/api/posts", function (req, res) {
 // =============================================================
 
 // Route to select and delete a post by requestID
-app.delete("/api/posts/:requestID", function(req, res) {
+router.delete("/api/posts/:requestID", function(req, res) {
     db.Post.destroy({
       where: {
         requestID: req.params.requestID
