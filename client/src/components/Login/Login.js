@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { form } from "reactstrap";
+import "../Pages/style.css"
 
 class Login extends Component {
     render () {
