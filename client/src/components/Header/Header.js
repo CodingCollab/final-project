@@ -30,6 +30,12 @@ class Header extends Component {
                   <a className="nav-link" href="#">Services</a>
                 </li>
                 <li className="nav-item">
+                  <a className="nav-link" href="newLanguage.html">Language Form</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="newRequest.html">Request Form</a>
+                </li>
+                <li className="nav-item">
                   <a className="nav-link" href="login.html">Login/Sign Up</a>
                 </li>
               </ul>
