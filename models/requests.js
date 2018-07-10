@@ -5,6 +5,13 @@ const UserRequest = require("./userRequests");
 
 module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define("Requests", {
+        id: {
+            type: Sequelize.INTEGER,
+            unique: true,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         requestID: {
             type: Sequelize.CHAR(36),
             unique: true,
@@ -46,43 +53,6 @@ module.exports = (sequelize, Sequelize) => {
         requestCompletedDate: {
             type: Sequelize.DATE,
             allowNull: true
-        // },
-
-        // Reconfiguring to limit overlapping duplication
-        // requestedByUser_userID: {
-            // type: Sequelize.CHAR(36),
-            // allowNull: false,
-            // defaultValue: Sequelize.UUIDV4 //,
-            // // references: {
-            // //     model: User,
-            // //     // key: /*"id"*/ "userID"
-            // //     key: "userID"
-            // // }
-        // },
-        // requestedByUser_userName: {
-            // type: Sequelize.STRING,
-            // allowNull: false //,
-            // // references: {
-            // //     model: User,
-            // //     key: /*"id"*/ "userName"
-            // // }
-        // },
-        // requestAcceptedBy_userID: {
-            // type: Sequelize.CHAR(36),
-            // allowNull: true,
-            // defaultValue: Sequelize.UUIDV4 //,
-            // // references: {
-            // //     model: User,
-            // //     key: /*"id"*/ "userID"
-            // // }
-        // },
-        // requestAcceptedBy_userName: {
-            // type: Sequelize.STRING,
-            // allowNull: true //,
-            // // references: {
-            // //     model: User,
-            // //     key: /*"id"*/ "userName"
-            // // }
         }
     });
 
