@@ -1,4 +1,4 @@
 const apiRoutes = require ("./apiRoutes")
 
-module.exports = apiRoutes
+module.exports = apiRoutes;
 

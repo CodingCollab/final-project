@@ -9,18 +9,37 @@ A full stack web application designed to allow users to post coding projects whe
     - TBD
 
 ## Technology used
-- Node.js
-- Sequalize
-- Body-Parser NPM Package  
-- Express NPM Package
-- Path NPM Package
-- Heroku
-- jQuery
-- Express
-- Bootstrap
-- JawsDB
-- React
-- Yarn
+- JavaScript Libraries and packages
+    - bcrypt
+    - Body-Parser NPM Package  
+    - Bootstrap Npm Package
+    - concurrently
+    - dotenv
+    - Express NPM Package
+    - if-env
+    - jQuery
+    - mysql
+    - mysql2
+    - Node.js
+    - nodemon
+    - passport
+    - passport-local
+    - Path NPM Package
+    - popper
+    - React
+    - react-day-picker
+    - react-dom
+    - reactstrap
+    - Sequalize
+    - Yarn
+- Hosting
+    - Heroku
+    - JawsDB
+- CSS
+    - Bootstrap
+- Database
+    - MySQL
+    - Sequelize ORM
 
 ### Prerequisites
 ```
