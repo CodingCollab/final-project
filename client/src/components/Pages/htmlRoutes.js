@@ -8,11 +8,12 @@
 // =============================================================
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-
 import Login from '../Login'
 import NewRequestForm from '../NewRequestForm'
 import Home from '../Home'
 
+// Creating the Switch for the main section of the site..
+// =============================================================
 const Main = () => (
     <main>
         <Switch>
@@ -23,4 +24,7 @@ const Main = () => (
     </main>
 )
 
+
+// Exporting the element as "Main"
+// =============================================================
 export default Main
