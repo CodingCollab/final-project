@@ -1,11 +1,17 @@
 'Use Strict'
-// import { compareSync, hashSync, genSaltSync } from "bcrypt";
 
 const bcrypt = require("bcrypt");
 const Request = require("./requests");
 const UserRequests = require("./userRequests");
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("User", {
+        id: {
+            type: Sequelize.INTEGER,
+            unique: true,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         firstName: {
             type: Sequelize.STRING,
             allowNull: false
@@ -23,12 +29,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.CHAR(36),
             unique: true,
             allowNull: false,
-            defaultValue: Sequelize.UUIDV4,
-            primaryKey: true
+            defaultValue: Sequelize.UUIDV4
         },
         userPass: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         email: {
             type: Sequelize.STRING,
@@ -37,7 +43,7 @@ module.exports = (sequelize, Sequelize) => {
             validate: {
                 isEmail: true
             }
-        },
+        }
     });
 
     User.prototype.validPassword = function (userPass) {

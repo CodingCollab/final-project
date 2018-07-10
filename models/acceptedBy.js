@@ -4,7 +4,7 @@ const User = require("./users");
 const Request = require("./requests");
 
 module.exports = (sequelize, Sequelize) => {
-    const AcceptedBy = sequelize.define("RequestedBy", {
+    const AcceptedBy = sequelize.define("AcceptedBy", {
         acceptedByID: {
             type: Sequelize.CHAR(36),
             allowNull: false,

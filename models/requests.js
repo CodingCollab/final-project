@@ -5,6 +5,13 @@ const UserRequest = require("./userRequests");
 
 module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define("Requests", {
+        id: {
+            type: Sequelize.INTEGER,
+            unique: true,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         requestID: {
             type: Sequelize.CHAR(36),
             unique: true,
@@ -46,6 +53,7 @@ module.exports = (sequelize, Sequelize) => {
         requestCompletedDate: {
             type: Sequelize.DATE,
             allowNull: true
+        // added by kevin
         },
         acceptedBy: {
             type: Sequelize.STRING,
