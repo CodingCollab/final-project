@@ -7,7 +7,7 @@ class Footer extends Component {
         
         <footer className="py-3 bg-dark fixed-bottom">
           <div className="container">
-            <p className="m-0 text-center text-white">Copyright © CodingCollabs 2018</p>
+            <p className="m-0 text-center text-white">Copyright © CodingCollab 2018</p>
           </div>
         </footer>
         );
