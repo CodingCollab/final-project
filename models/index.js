@@ -30,12 +30,12 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.user = sequelize.import(__dirname + "/users.js");
-db.request = sequelize.import(__dirname + "/requests.js");
-db.acceptedBy = sequelize.import(__dirname + "/acceptedBy.js");
-db.languages = sequelize.import(__dirname + "/languages.js");
-db.requestedBy = sequelize.import(__dirname + "/requestedBy.js");
-db.requestLanguages = sequelize.import(__dirname + "/requestLanguages.js");
+// db.user = sequelize.import(__dirname + "/users.js");
+// db.request = sequelize.import(__dirname + "/requests.js");
+// db.acceptedBy = sequelize.import(__dirname + "/acceptedBy.js");
+// db.languages = sequelize.import(__dirname + "/languages.js");
+// db.requestedBy = sequelize.import(__dirname + "/requestedBy.js");
+// db.requestLanguages = sequelize.import(__dirname + "/requestLanguages.js");
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
