@@ -34,7 +34,7 @@ router.post("/api/posts", (req, res) => {
 
 // Route to get all postings from the db (should not be used often outside testing)
 router.get("/api/posts", (req, res) => {
-    db.Post.findAll({})
+    db.Requests.findAll({})
         .then(function (dbPost) {
             res.json(dbPost);
         });

@@ -1,20 +1,14 @@
 import React from "react";
-// import Header from "./components/Header";
-// import Login from "./components/Login";
-// import Footer from "./components/Footer";
-import NewRequestForm from "./components/NewRequestForm";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Main from '../../client/src/components/Pages/htmlRoutes'
 
 const App = () => [
-    // <Header />,
-    // <Footer />    
-    <NewRequestForm />
+    <Header />,
+    <Main />,
+    <Footer />
 ];
 
 export default App;
 
-// <Router>
-// <Switch>
-// <Route exact path=“/login” component={Login} />
-// </Switch>
-// </Router>
 

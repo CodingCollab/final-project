@@ -46,10 +46,14 @@ module.exports = (sequelize, Sequelize) => {
         requestCompletedDate: {
             type: Sequelize.DATE,
             allowNull: true
+        },
+        acceptedBy: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     });
     request.associate(models => {
-        request.belongsToMany(models.users)
+        request.belongsToMany(models.users, {foreignKey: "userID"})
     });
 
     return Request;
