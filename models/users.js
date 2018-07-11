@@ -54,9 +54,9 @@ module.exports = (sequelize, Sequelize) => {
         user.userPass = bcrypt.hashSync(user.userPass, bcrypt.genSaltSync(10), null);
     });
 
-    users.associate(models => {
-        users.belongsToMany(models.request, {foreignKey: "requestID"})
-    });
+    // users.associate(models => {
+    //     users.belongsToMany(models.request, {foreignKey: "requestID"})
+    // });
 
     return User;
 };
