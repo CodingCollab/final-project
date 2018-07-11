@@ -1,0 +1,3 @@
+# files and folders to be ignored by heroku before heroku compiles the project
+
+package-lock.json
