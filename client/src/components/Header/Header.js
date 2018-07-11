@@ -8,8 +8,7 @@ class Header extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
             <a className="navbar-brand" href="#">
-              <img src="https://ptpimg.me/h3q1y0.png
-
+              <img src="https://ptpimg.me/8f7267.jpg
   
             " style={{display: 'inline-block'}} />
               <span style={{display: 'inline-block'}}>CodingCollabs</span>
