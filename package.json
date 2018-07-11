@@ -1,40 +1,55 @@
 {
-  "title": "Business Frontpage",
-  "name": "startbootstrap-business-frontpage",
-  "version": "4.1.1",
-  "description": "A simple business HTML landing page built with Bootstrap",
-  "keywords": [
-    "css",
-    "sass",
-    "html",
-    "responsive",
-    "theme",
-    "template"
-  ],
-  "homepage": "https://startbootstrap.com/template-overviews/business-frontpage",
-  "bugs": {
-    "url": "https://github.com/BlackrockDigital/startbootstrap-business-frontpage/issues",
-    "email": "feedback@startbootstrap.com"
+  "name": "codingfiverr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && yarn install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
-  "author": "Start Bootstrap",
-  "contributors": [
-    "David Miller (http://davidmiller.io/)"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BlackrockDigital/startbootstrap-business-frontpage.git"
-  },
+  "author": "Kevin Glasow, Lawrence Splaver, Matthew Skrajner and Brian Zeuch",
+  "license": "ISC",
   "dependencies": {
-    "bootstrap": "4.1.1",
-    "jquery": "3.3.1"
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.1.1",
+    "express": "^4.16.3",
+    "if-env": "^1.0.4",
+    "jquery": "^3.3.1",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "popper.js": "^1.14.3",
+    "react": "^16.4.1",
+    "react-day-picker": "^7.1.9",
+    "react-dom": "^16.4.1",
+    "reactstrap": "^6.1.0",
+    "sequelize": "^4.38.0",
+    "path": "^0.12.7",
+    "dotenv": "^6.0.0"
   },
   "devDependencies": {
-    "browser-sync": "2.24.3",
-    "gulp": "^3.9.1"
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.5"
   },
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bugs": {
+    "url": "https://github.com/CodingCollab/final-project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodingCollab/final-project.git"
+  },
+  "peerDependencies": {
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
