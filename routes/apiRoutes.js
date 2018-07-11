@@ -17,16 +17,41 @@ const db = require("../models")
 // Route for a user to complete a new post by accept input from the NewRequestForm component
 router.post("/api/posts", (req, res) => {
     console.log(req.body)
-    db.Post.create({
-            userName: req.body.userName,
-            requestName: req.body.requestName,
-            requestContent: req.body.requestContent,
-            requestPrice: req.body.requestPrice,
-            requestDueDate: req.body.requestDueDate
-        })
-        .then(function (dbPost) {
-            res.json(dbPost)
-        });
+    // db.Post.create({
+    db.Requests.create({
+        userName: req.body.userName,
+        requestName: req.body.requestName,
+        requestContent: req.body.requestContent,
+        requestPrice: req.body.requestPrice,
+        requestDueDate: req.body.requestDueDate
+    })
+    .then(function (dbPost) {
+        res.json(dbPost)
+    });
+});
+
+// Route to create a new user
+router.post("/api/posts", (req, res) => {
+    db.Users.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        userName: req.body.userName,
+        userPass: req.body.userPass,
+        email: req.body.email
+    })
+    .then(function (dbPost) {
+        res.json(dbPost);
+    });
+});
+
+// Route to create a new language tag
+router.post("/api/posts/", (req, res) => {
+    db.Languages.create({
+        langName: req.body.langName
+    })
+    .then(function (dbPost) {
+        res.json(dbPost);
+    });
 });
 
 // READ ROUTES
@@ -34,7 +59,8 @@ router.post("/api/posts", (req, res) => {
 
 // Route to get all postings from the db (should not be used often outside testing)
 router.get("/api/posts", (req, res) => {
-    db.Post.findAll({})
+    // db.Post.findAll({}) commented out during merge
+    db.Requests.findAll({})
         .then(function (dbPost) {
             res.json(dbPost);
         });
@@ -110,4 +136,4 @@ router.delete("/api/posts/:requestID", function(req, res) {
       });
   });
 
-module.exports = router
+module.exports = router;

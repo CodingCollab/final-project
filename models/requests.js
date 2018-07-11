@@ -53,25 +53,16 @@ module.exports = (sequelize, Sequelize) => {
         requestCompletedDate: {
             type: Sequelize.DATE,
             allowNull: true
+        // added by kevin
+        },
+        acceptedBy: {
+            type: Sequelize.STRING,
+            allowNull: true
         }
     });
-
-    // Commented out while trying to get correct sequilize recognition of associations
-    // Request.associate = function(models) {
-    //     Request.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
-
-    // Request.belongsToMany(User, {
-    //     through: {
-    //         model: User,
-    //         unique: true,
-    //     },
-    //     foreignKey: "userID"
-    // });
+    request.associate(models => {
+        request.belongsToMany(models.users, {foreignKey: "userID"})
+    });
 
     return Request;
 };
