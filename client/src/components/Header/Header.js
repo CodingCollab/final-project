@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { navbar} from "reactstrap";
 
 class Header extends Component {
     render () {
@@ -7,10 +6,9 @@ class Header extends Component {
   
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
-            <a className="navbar-brand" href="#">
-              <img src="https://ptpimg.me/8f7267.jpg
-  
-            " style={{display: 'inline-block'}} />
+            <a className="navbar-brand" href="/about">
+              <img src="https://ptpimg.me/8f7267.jpg" 
+              alt="CodeCollab" style={{display: 'inline-block'}} />
               <span style={{display: 'inline-block'}}>CodingCollabs</span>
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
