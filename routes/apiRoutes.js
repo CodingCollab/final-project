@@ -31,7 +31,7 @@ router.post("/api/posts", (req, res) => {
 });
 
 // Route to create a new user
-router.post("/api/posts", (req, res) => {
+router.post("/api/userpost", (req, res) => {
     db.Users.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,

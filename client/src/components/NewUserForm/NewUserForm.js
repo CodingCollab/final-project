@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { form } from "reactstrap";
 import "./NewUserForm.css";
+import "../Pages/style.css";
 
 class NewUserForm extends Component {
   constructor(props) {
@@ -54,17 +56,22 @@ class NewUserForm extends Component {
     // logic
     console.log(this.state)
 
-    const myPost = {
+    const myRequest = new Request("/api/userpost", {
       method: 'POST',
-      data: this.state
-    };
+      data: '{"firstName": "this.state.firstName", "lastName": "this.state.lastName", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
+    });
+    // const myPost = {
+    //   method: "POST",
+    //   data: this.state
+    // };
 
-    fetch("newUser", myPost)
+    // /*fetch*/Request("http://localhost/api", myPost)
+    fetch(myRequest)
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
-            isLoaded: true,
+            // isLoaded: true,
             firstName: result.firstName,
             lastName: result.lastName,
             userName: result.userName,
@@ -92,12 +99,12 @@ class NewUserForm extends Component {
       return (
         <div>
           <div>There was an error creating a new user</div>
-          {console.log(error)}
+          <div>The error is: {/*console.log(*/toString(error)/*)*/}</div>
         </div>
       );
     }
     // else if (!isLoaded) {
-      // return <div>Currently Loading</div>
+    // return <div>Currently Loading</div>
     // }
     else {
       return (
@@ -105,7 +112,8 @@ class NewUserForm extends Component {
           <p>
             Please fill out the following form to create your new user account.
         </p>
-          <form className="form">
+          <form className="form validate-form">
+
             <input
               value={this.state.firstName}
               name="firstName"
@@ -127,20 +135,24 @@ class NewUserForm extends Component {
               type="text"
               placeholder="User Name"
             />
-            <input
-              value={this.state.userPass}
-              name="userPass"
-              onChange={this.handleInputChange}
-              type="text"
-              placeholder="Password"
-            />
-            <input
-              value={this.state.email}
-              name="email"
-              onChange={this.handleInputChange}
-              type="text"
-              placeholder="Email"
-            />
+            <div className="validate-input" data-validate="Valid password is required">
+              <input
+                value={this.state.userPass}
+                name="userPass"
+                onChange={this.handleInputChange}
+                type="password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="validate-input" data-validate="valid email is required: ex@abc.xyz">
+              <input
+                value={this.state.email}
+                name="email"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Email"
+              />
+            </div>
             <button onClick={this.handleFormSubmit}>Submit</button>
           </form>
         </div>

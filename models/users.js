@@ -1,8 +1,8 @@
 'Use Strict'
 
 const bcrypt = require("bcrypt");
-const Request = require("./requests");
-const UserRequests = require("./userRequests");
+// const Request = require("./requests");
+// const UserRequests = require("./userRequests");
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("User", {
         id: {
