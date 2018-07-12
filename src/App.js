@@ -6,9 +6,6 @@ import Main from '../../client/src/components/Pages/htmlRoutes'
 const App = () => [
     <Header />,
     <Main />,
-    <br></br>,
-    <br></br>,
-    <br></br>,
     <Footer />
 ];
 
