@@ -6,12 +6,14 @@
 
 // DEPENDENCIES
 // =============================================================
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import Login from '../Login'
-import NewRequestForm from '../NewRequestForm'
-import Home from '../Home'
-import About from '../About'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Login from '../Login';
+import NewRequestForm from '../NewRequestForm';
+import Home from '../Home';
+import About from '../About';
+import NewLanguageForm from '../NewLanguageForm';
+import NewUserForm from '../NewUserForm';
 
 // Creating the Switch for the main section of the site
 // =============================================================
@@ -22,6 +24,8 @@ const Main = () => (
             <Route path='/Login' component={ Login }/>
             <Route path='/NewRequestForm' component={ NewRequestForm }/>
             <Route path='/About' component={ About }/>
+            <Route path='/NewLanguageForm' component={ NewLanguageForm }/>
+            <Route path='/NewUserForm' component={ NewUserForm }/>
         </Switch>
     </main>
 )

@@ -34,11 +34,11 @@ class Header extends Component {
                   <a className="nav-link" href="/login">Login/Sign Up</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="newLanguage.html">Language Form</a>
+                  <a className="nav-link" href="/NewLanguageForm">Language Form</a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link" href="newRequest.html">Request Form</a>
-                </li>
+                </li> */}
                 {/* from Lawrence
                   <li className="nav-item">
                     <a className="nav-link" href="login.html">Login/Sign Up</a>
