@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 // const Request = require("./requests");
 // const UserRequests = require("./userRequests");
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("User", {
+    const Users = sequelize.define("Users", {
         id: {
             type: Sequelize.INTEGER,
             unique: true,
@@ -46,11 +46,11 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    User.prototype.validPassword = function (userPass) {
+    Users.prototype.validPassword = function (userPass) {
         return bcrypt.compareSync(userPass, this.userPass);
     };
 
-    User.hook("beforeCreate", function (user) {
+    Users.hook("beforeCreate", function (user) {
         user.userPass = bcrypt.hashSync(user.userPass, bcrypt.genSaltSync(10), null);
     });
 
@@ -58,5 +58,5 @@ module.exports = (sequelize, Sequelize) => {
     //     users.belongsToMany(models.request, {foreignKey: "requestID"})
     // });
 
-    return User;
+    return Users;
 };

@@ -58,7 +58,8 @@ class NewUserForm extends Component {
 
     const myRequest = new Request("/api/userpost", {
       method: 'POST',
-      data: '{"firstName": "this.state.firstName", "lastName": "this.state.lastName", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
+      // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
+      body: `{"firstName": "${this.state.firstName}", "lastName": "${this.state.lastName}", "userName": "${this.state.userName}", "userPass": "${this.state.userPass}", "email": "${this.state.email}"}`
     });
     // const myPost = {
     //   method: "POST",
