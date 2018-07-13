@@ -1,7 +1,7 @@
 // import { Module } from "module";
 'use strict'
-const User = require("./users");
-const UserRequest = require("./userRequests");
+// const User = require("./users");
+// const UserRequest = require("./userRequests");
 
 module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define("Requests", {

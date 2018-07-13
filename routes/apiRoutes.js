@@ -9,7 +9,7 @@
 
 const express = require("express");
 const router = express.Router();
-const db = require("../models")
+const db = require("../models");
 
 // CREATE ROUTES
 // =============================================================
@@ -31,7 +31,9 @@ router.post("/api/posts", (req, res) => {
 });
 
 // Route to create a new user
-router.post("/api/posts", (req, res) => {
+router.post("/api/userpost", (req, res) => {
+    console.log(JSON.stringify(req.body));
+    console.log("firstName:",req.body.firstName);
     db.Users.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,

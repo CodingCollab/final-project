@@ -39,12 +39,12 @@ class Login extends Component {
                   <span className="txt1">
                     Forgot
                   </span>
-                  <a className="txt2" href="/newUser">
+                  <a className="txt2" href="/lostPass">
                     Username / Password?
                   </a>
                 </div>
                 <div className="text-center p-t-136">
-                  <a className="txt2" href="/lostPass">
+                  <a className="txt2" href="/NewUserForm">
                     Create your Account
                     <i className="fa fa-long-arrow-right m-l-5" aria-hidden="true" />
                   </a>
