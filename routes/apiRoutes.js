@@ -32,7 +32,8 @@ router.post("/api/posts", (req, res) => {
 
 // Route to create a new user
 router.post("/api/userpost", (req, res) => {
-    console.log(req.body.lastName);
+    console.log(JSON.stringify(req.body));
+    console.log("firstName:",req.body.firstName);
     db.Users.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,

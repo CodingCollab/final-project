@@ -60,6 +60,7 @@ class NewUserForm extends Component {
       method: 'POST',
       // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
       body: `{"firstName": "${this.state.firstName}", "lastName": "${this.state.lastName}", "userName": "${this.state.userName}", "userPass": "${this.state.userPass}", "email": "${this.state.email}"}`
+      // body: {"firstName": this.state.firstName, "lastName": this.state.lastName, "userName": this.state.userName, "userPass": this.state.userPass, "email": this.state.email}
     });
     // const myPost = {
     //   method: "POST",
