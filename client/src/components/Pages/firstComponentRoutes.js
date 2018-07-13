@@ -1,19 +1,18 @@
-// Last Update by Kevin Glasow on 07/01/2018
+// Last Update by Kevin Glasow on 07/12/2018
 
 // *********************************************************************************
-// htmlRoutes.js - contains a set of routes for sending users to the various html pages
+// firstComponentRoutes.js - contains a set of routes for rending the top most component of the main page
 // *********************************************************************************
 
 // DEPENDENCIES
 // =============================================================
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Login from '../Login';
-import NewRequestForm from '../NewRequestForm';
-import Home from '../Home';
-import About from '../About';
-import NewLanguageForm from '../NewLanguageForm';
-import NewUserForm from '../NewUserForm';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import Login from '../Login'
+import NewRequestForm from '../NewRequestForm'
+import Home from '../Home'
+import About from '../About'
+import Search from '../Search'
 
 // Creating the Switch for the main section of the site
 // =============================================================
@@ -24,11 +23,10 @@ const Main = () => (
             <Route path='/Login' component={ Login }/>
             <Route path='/NewRequestForm' component={ NewRequestForm }/>
             <Route path='/About' component={ About }/>
-            <Route path='/NewLanguageForm' component={ NewLanguageForm }/>
-            <Route path='/NewUserForm' component={ NewUserForm }/>
+            <Route path='/Search' component={ Search }/>
         </Switch>
     </main>
 )
 
-// Exporting the element as "Main"
-export default Main
+// Exporting the elements as "Main"
+export default Main;
