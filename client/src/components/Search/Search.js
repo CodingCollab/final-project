@@ -8,62 +8,54 @@
 // =============================================================
 
 import React, { Component } from "react";
-import { form } from "reactstrap";
-import "../Pages/style.css"
+import "../Pages/style.css";
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 // SEARCH LOGIC
 // =============================================================
 
 class searchForm extends Component {
-    // Setting the component's initial state
-    state = {
-      searchTerm: "",
-      };
+  constructor(props) {
+    super(props);
 
-      handleInputChange = event => {
-        // Getting the value and name of the input which triggered the change
-        let value = event.target.value;
-        const name = event.target.name;
-    
-        // Updating the input's state
-        this.setState({
-          [name]: value
-        });
-      };
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
+  }
 
-      handleFormSubmit = event => {
-
-        event.preventDefault()
-        // logic
-        console.log(this.state)
-    
-        this.setState({
-          searchTerm: "",
-          });
-      };
-    
-
-// RENDERING SEARCH BAR
-// =============================================================
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
 
   render() {
-      return (
-          <div>
-              <p>
-                  Search for posts here!
-              </p>
-              <form className="form">
-          <input
-            value={this.state.searchTerm}
-            name="searchTerm"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Search Stuff"
-          />
-           <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
-         </div>
-      );
+    return (
+      // Begining search bar portion of the form
+      <div>
+        <Form>
+          <FormGroup>
+            <Input type="text" name="searchTerm" placeholder="Search Term" />
+          </FormGroup>
+          {/*Begining dropdown  */}
+        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle caret>
+            Search Category
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem header>Search Category</DropdownItem>
+            <DropdownItem>User Name</DropdownItem>
+            <DropdownItem>Request Description</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem>Any</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        
+        </Form>
+      </div>
+    );
   }
 }
 

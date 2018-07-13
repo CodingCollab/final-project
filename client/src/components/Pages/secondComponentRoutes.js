@@ -10,7 +10,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Results from '../Results'
 
-// Creating the Switch for the main section of the site
+// Creating the Switch for the second section of the site
 // =============================================================
 
 
@@ -22,5 +22,5 @@ const Second = () => (
     </second>
 )
 
-// Exporting the elements as "Main" and "Second"
+// Exporting the elements as Second"
 export default Second;
