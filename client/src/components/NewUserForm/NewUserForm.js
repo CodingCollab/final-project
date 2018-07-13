@@ -2,43 +2,48 @@ import React, { Component } from "react";
 import { form } from "reactstrap";
 import "./NewUserForm.css";
 import "../Pages/style.css";
+import axios from "axios";
 
 class NewUserForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // error: null,
-      // isLoaded: false,
+      error: null,
+      isLoaded: false,
       firstName: "",
       lastName: "",
       userName: "",
       userPass: "",
       email: ""
     };
-  }
-  // Setting the component's initial state
-  // state = {
-  // langName: ""
-  // };
+  };
 
   // componentDidUpdate() {
-  //   fetch("newLanguage.html")
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           langName: result.langName
-  //         });
-  //       },
-  //       (error) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           error
-  //         });
-  //       }
-  //     )
-  // }
+  // fetch("/api/userpost")
+  //   .then(res => res.json())
+  //   .then(
+  //     (result) => {
+  //       this.setState({
+  //         isLoaded: true,
+  //         langName: result.langName
+  //       });
+  //     },
+  //     (error) => {
+  //       this.setState({
+  //         isLoaded: true,
+  //         error
+  //       });
+  //     }
+  //   )
+  // axios.get({
+  //   method: 'GET',
+  //   url: '/api/user/getall',
+  //   data: [{
+
+  //   }]
+  // })
+  // };
+
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
@@ -50,47 +55,52 @@ class NewUserForm extends Component {
     });
   };
 
+  // create new user from form data
+  // uncomment the lines with /* */ if you need to test the route in console logs
   handleFormSubmit = event => {
+    /* console.log("The handleFormSubmit has been triggered"); */
 
     event.preventDefault()
-    // logic
-    console.log(this.state)
 
-    const myRequest = new Request("/api/userpost", {
-      method: 'POST',
-      // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
-      body: `{"firstName": "${this.state.firstName}", "lastName": "${this.state.lastName}", "userName": "${this.state.userName}", "userPass": "${this.state.userPass}", "email": "${this.state.email}"}`
-      // body: {"firstName": this.state.firstName, "lastName": this.state.lastName, "userName": this.state.userName, "userPass": this.state.userPass, "email": this.state.email}
-    });
-    // const myPost = {
-    //   method: "POST",
-    //   data: this.state
-    // };
+    /* console.log("preventDefault has triggered");
+     * logic
+     * console.log(this.state)
+     * console.log("this.state has been written to console"); */
 
-    // /*fetch*/Request("http://localhost/api", myPost)
-    fetch(myRequest)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            // isLoaded: true,
-            firstName: result.firstName,
-            lastName: result.lastName,
-            userName: result.userName,
-            userPass: result.userPass,
-            email: result.email
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-    // this.setState({
-    //   langName: ""
+    // const myRequest = new Request("/api/userpost", {
+    //   method: 'POST',
+    //   // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
+    //   body: `{"firstName": "${this.state./*.setState(*/firstName/*)*/}", "lastName": "${this.state./*setState(*/lastName/*)*/}", "userName": "${this.state./*.setState(*/userName/*)*/}", "userPass": "${this.state./*.setState(*/userPass/*)*/}", "email": "${this.state./*setState(*/email/*)*/}"}`
+    //   // body: {"firstName": this.state.firstName, "lastName": this.state.lastName, "userName": this.state.userName, "userPass": this.state.userPass, "email": this.state.email}
     // });
+
+    /* console.log("myRequest has been created: ", JSON.stringify(myRequest));
+     * console.log("this.state.firstName: ", this.state.firstName);
+     * console.log("this.state.lastName: ", this.state.lastName);
+     * console.log("this.state.userName: ", this.state.userName);
+     * console.log("this.state.userPass: ", this.state.userPass);
+     * console.log("this.state.email: ", this.state.email); */
+    axios({
+      method: 'POST',
+      url: '/api/userpost',
+      data: {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        userName: this.state.userName,
+        userPass: this.state.userPass,
+        email: this.state.email
+      }
+    })
+    .then(function (response) {
+      console.log("response: ", response);
+    },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    );
   };
 
   // begining the form
@@ -101,7 +111,7 @@ class NewUserForm extends Component {
       return (
         <div>
           <div>There was an error creating a new user</div>
-          <div>The error is: {/*console.log(*/toString(error)/*)*/}</div>
+          <div>The error is: {JSON.stringify(error)}</div>
         </div>
       );
     }
@@ -114,7 +124,7 @@ class NewUserForm extends Component {
           <p>
             Please fill out the following form to create your new user account.
         </p>
-          <form className="form validate-form">
+          <form className="form validate-form" onSubmit={this.handleFormSubmit}>
 
             <input
               value={this.state.firstName}
@@ -155,12 +165,12 @@ class NewUserForm extends Component {
                 placeholder="Email"
               />
             </div>
-            <button onClick={this.handleFormSubmit}>Submit</button>
+            <button id="btnSubmit">Submit</button>
           </form>
         </div>
       );
     }
-  }
-}
+  };
+};
 
 export default NewUserForm;
