@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 
-class Home extends Component {
-    render () {
-      return (
-        
-        <div className="home">
-            <p> This will be a home page someday </p>
-        </div>
-        );
-    }
-  };
+import { Jumbotron, Container } from 'reactstrap';
+
+const Home = (props) => {
+  return (
+    <div>
+      <Jumbotron fluid>
+        <Container fluid>
+          <h1 className="display-3">CodingCollab</h1>
+          <p className="lead">Write some code and earn some cash - for you and for charity!</p>
+        </Container>
+      </Jumbotron>
+    </div>
+  );
+};
 
 export default Home;
