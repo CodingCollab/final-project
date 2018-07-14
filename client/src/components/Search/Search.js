@@ -1,65 +1,92 @@
-// Last Update by Kevin Glasow on 07/12/2018
-
-// *********************************************************************************
-// search.js - component to render on page to search for posts
-// *********************************************************************************
-
-// DEPENDENCIES
-// =============================================================
-
 import React, { Component } from "react";
-import "../Pages/style.css";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
-// SEARCH LOGIC
-// =============================================================
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButtonDropdown,
+  Input,
+  Button,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+ } from 'reactstrap';
 
 class searchForm extends Component {
+  state = {
+    searchType: "",
+    searchText: ""
+  };
+
+
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.toggleSplit = this.toggleSplit.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      splitButtonOpen: false
     };
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
+  toggleDropDown() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
   }
+
+  toggleSplit() {
+    this.setState({
+      splitButtonOpen: !this.state.splitButtonOpen
+    });
+  }
+
+  handleInputChange = event => {
+    // Getting the value and name of the input which triggered the change
+    let value = event.target.value;
+    const name = event.target.name;
+
+    // Updating the input's state
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleFormSubmit = event => {
+
+    event.preventDefault()
+    // logic
+    console.log(this.state)
+
+    this.setState({
+      searchType: "",
+      searchText: ""
+      });
+  };
+
 
   render() {
     return (
-      // Begining search bar portion of the form
       <div>
-        <Form>
-          <FormGroup>
-            <Input type="text" name="searchTerm" placeholder="Search Term" />
-          </FormGroup>
-          {/*Begining dropdown  */}
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle caret>
-            Search Category
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem header>Search Category</DropdownItem>
-            <DropdownItem>User Name</DropdownItem>
-            <DropdownItem>Request Description</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Any</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        
-        </Form>
+        <InputGroup>
+          <InputGroupButtonDropdown addonType="prepend" isOpen={this.state.splitButtonOpen} toggle={this.toggleSplit}>
+            <DropdownToggle caret>
+              Search Type 
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem header>Search Type</DropdownItem>
+              <DropdownItem>User Name</DropdownItem>
+              <DropdownItem>Request Description</DropdownItem>
+              <DropdownItem>Language</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>All</DropdownItem>
+            </DropdownMenu>
+          </InputGroupButtonDropdown>
+          <Input placeholder="Search Term" />
+          <InputGroupAddon addonType="append"><Button color="secondary" onClick={this.handleFormSubmit}>Search</Button></InputGroupAddon>
+        </InputGroup>
       </div>
     );
   }
 }
-
-// EXPORTING COMPONENT
-// =============================================================
 
 export default searchForm;
