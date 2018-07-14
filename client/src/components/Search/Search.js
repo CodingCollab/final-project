@@ -18,7 +18,7 @@ import {
   DropdownItem
  } from 'reactstrap';
 
-// DEPENDENCIES
+// COMPONENTS
 // =============================================================
 // Setting empty state for the componenet 
 class searchForm extends Component {
@@ -55,17 +55,14 @@ class searchForm extends Component {
 
   handleDropdownSelect = event => {
     let value = event.target.value;
-    const name = event.target.name;
+    // const name = event.target.name;
     
-    console.log(name);
-    console.log(value);
     // Updating the input's state
     this.setState({
       searchType: value
       // [name]: value
     });
 
-    console.log(this.state.searchType);
   }
 
   handleInputChange = event => {
@@ -73,7 +70,6 @@ class searchForm extends Component {
     let value = event.target.value;
     const name = event.target.name;
     if(name==="searchType"){
-      console.log("here");
       document.getElementById("header").innerHTML = value;
     }
     // Updating the input's state
@@ -81,7 +77,6 @@ class searchForm extends Component {
       [name]: value
     });
 
-    console.log(this.state);
   };
 
   handleFormSubmit = event => {
@@ -95,13 +90,11 @@ class searchForm extends Component {
       searchTerm: ""
       });
 
-
   };
 
 // RENDERING COMPONENT
 // =============================================================
   render() {
-    console.log(this.state);
     return (
       <div>
         <InputGroup>
@@ -123,7 +116,6 @@ class searchForm extends Component {
             name="searchTerm"
             onChange={this.handleInputChange}
             type="text"
-            // placeholder="Search Term"
           />
           <InputGroupAddon addonType="append"><Button color="secondary" onClick={this.handleFormSubmit}>Search</Button></InputGroupAddon>
         </InputGroup>
