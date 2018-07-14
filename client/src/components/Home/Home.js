@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import { Card, Button, CardImg, CardTitle, CardText, CardGroup,
   CardBody } from 'reactstrap';
+import { Jumbotron, Container } from 'reactstrap';
+
 
 const Home = (props) => {
   return (
     <div>
+      <Jumbotron fluid>
+        <Container fluid>
+          <h1 className="display-3">CodeCollab</h1>
+          <p className="lead">Use your coding skills to earn quick cash - for you and for charity!</p>
+          <p className="lead">This is ugly though so it'll likely need some styling.</p>
+        </Container>
+      </Jumbotron>
+    
     <CardGroup top width="85%">
       <Card>
         <CardImg top width="100%" object-fit="cover" src="https://www.mxcursos.com/image/cache/data/Thumbs2017/javascript-cr-292x175.png" alt="Card image cap" />
