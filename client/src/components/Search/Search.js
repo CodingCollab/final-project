@@ -60,7 +60,6 @@ class searchForm extends Component {
     // Updating the input's state
     this.setState({
       searchType: value
-      // [name]: value
     });
 
   }
