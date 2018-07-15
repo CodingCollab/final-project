@@ -1,5 +1,5 @@
 {
-  "name": "codingfiverr",
+  "name": "codingcollab",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,7 +13,7 @@
     "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Kevin Glasow, Lawrence Splaver, Matthew Skrajner and Brian Zeuch",
+  "author": "Kevin Glasow, Matthew Skrajner, Lawrence Splaver and Brian Zeuch",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
