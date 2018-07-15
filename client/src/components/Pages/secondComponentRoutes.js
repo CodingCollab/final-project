@@ -15,11 +15,11 @@ import Results from '../Results'
 
 
 const Second = () => (
-    <second>
+    <div>
         <Switch>
             <Route path='/Search' component={ Results }/>
         </Switch>
-    </second>
+    </div>
 )
 
 // Exporting the elements as Second"
