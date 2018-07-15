@@ -13,6 +13,8 @@ import NewRequestForm from '../NewRequestForm'
 import Home from '../Home'
 import About from '../About'
 import Search from '../Search'
+import NewLanguageForm from '../NewLanguageForm';
+import NewUserForm from '../NewUserForm';
 
 // Creating the Switch for the main section of the site
 // =============================================================
@@ -24,6 +26,8 @@ const Main = () => (
             <Route path='/NewRequestForm' component={ NewRequestForm }/>
             <Route path='/About' component={ About }/>
             <Route path='/Search' component={ Search }/>
+            <Route path='/NewLanguageForm' component={ NewLanguageForm }/>
+            <Route path='/NewUserForm' component={ NewUserForm }/>
         </Switch>
     </main>
 )

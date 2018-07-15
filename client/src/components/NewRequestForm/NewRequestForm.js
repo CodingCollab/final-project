@@ -25,6 +25,7 @@ class NewRequestForm extends Component {
       isLoaded: false,
       userName: "",
       requestName: "",
+      requestLang: "",
       requestContent: "",
       requestPrice: "",
       requestDueDate: undefined
@@ -53,20 +54,13 @@ class NewRequestForm extends Component {
     // logic
     console.log(this.state)
 
-    // this.setState({
-    //   userName: "",
-    //   requestName: "",
-    //   requestContent: "",
-    //   requestPrice: "",
-    //   requestDueDate: undefined
-    // });
-
     axios({
       method: 'POST',
       url: '/api/reqpost',
       data: {
         userName: this.state.userName,
         requestName: this.state.requestName,
+        requestLang: this.state.requestLang,
         requestContent: this.state.requestContent,
         requestPrice: this.state.requestPrice,
         requestDueDate: this.state.requestDueDate
@@ -121,6 +115,13 @@ class NewRequestForm extends Component {
               onChange={this.handleInputChange}
               type="text"
               placeholder="Request Name"
+            />
+            <input
+              value={this.state.requestLang}
+              name="requestLang"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Requested Language"
             />
             <input
               value={this.state.requestContent}

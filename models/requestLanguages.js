@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
     // Requests.hasMany(Languages, { /*as: req_id,*/ through: RequestLanguages, foreignKey: 'requestID' });
     // Languages.belongsToMany(Requests, { /*as: lang_id,*/ through: RequestLanguages, foreignKey: 'langID' });
 
-    Requests.addLanguages(Languages, { through: lang_id });
+    // Requests.addLanguages(Languages, { through: lang_id });
 
     return RequestLanguages;
 };

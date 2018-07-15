@@ -19,7 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    Languages.belongsToMany(Requests, { /*as: lang_id,*/ through: RequestLanguages, foreignKey: 'langID' });
+    // Languages.belongsToMany(Requests, { /*as: lang_id,*/ through: RequestLanguages, foreignKey: 'langID' });
 
     return Languages;
 };

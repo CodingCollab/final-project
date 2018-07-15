@@ -74,7 +74,7 @@ module.exports = (sequelize, Sequelize) => {
     //     foreignKey: "userID"
     // });
 
-    Requests.hasMany(Languages, { /*as: req_id,*/ through: RequestLanguages, foreignKey: 'requestID' });
+    // Requests.hasMany(Languages, { /*as: req_id,*/ through: RequestLanguages, foreignKey: 'requestID' });
 
     return Request;
 };
