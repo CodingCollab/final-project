@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { Card, Button, CardImg, CardTitle, CardText, CardGroup,
-  CardBody } from 'reactstrap';
-import { Jumbotron, Container } from 'reactstrap';
-
+import { 
+  Card, 
+  Button, 
+  CardImg, 
+  CardTitle, 
+  CardText, 
+  CardGroup,
+  CardBody,
+  Jumbotron,
+  Container
+  } from 'reactstrap';
 
 class Home extends Component {
   render () {
