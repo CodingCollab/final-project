@@ -16,75 +16,94 @@ const db = require("../models");
 
 // Route for a user to complete a new post by accept input from the NewRequestForm component
 router.post("/api/reqpost", (req, res) => {
-    console.log(req.body)
-
-    let uName = req.body.userName, reqName = req.body.requestName, reqContent = req.body.requestContent, reqPrice = req.body.requestPrice, reqDueDate = req.body.requestDueDate, uID = "", reqID = "", tempDBPost = req.body;
-
+    console.log(req.body);
+    
+    var tempDBPost = req.body;
+    console.log(tempDBPost);
+    var uName = tempDBPost.userName;
     console.log("uName: ", uName);
+    var reqName = tempDBPost.requestName;
     console.log("reqName: ", reqName);
+    var reqContent = tempDBPost.requestContent;
     console.log("reqContent: ", reqContent);
+    var reqPrice = tempDBPost.requestPrice;
     console.log("reqPrice: ", reqPrice);
+    var reqDueDate = tempDBPost.requestDueDate;
     console.log("reqDueDate: ", reqDueDate);
+    var reqLang = tempDBPost.requestLang;
+    console.log("reqLang: ", reqLang);
+    var uID = "", reqID = "", lID = "";
+    
     console.log("uID: ", uID);
     console.log("reqID: ", reqID);
-    console.log("tempDBPost: \n", JSON.stringify(tempDBPost));
+    console.log("lID: ", lID);
+
     db.Requests.create({
-        userName: /*req.body.*/ tempDBPost.userName,
-        requestName: /*req.body.*/ tempDBPost.requestName,
-        requestContent: /*req.body.*/ tempDBPost.requestContent,
-        requestPrice: /*req.body.*/ tempDBPost.requestPrice,
-        requestDueDate: /*req.body.*/ tempDBPost.requestDueDate,
+        userName: tempDBPost.userName,
+        requestName: tempDBPost.requestName,
+        requestContent: tempDBPost.requestContent,
+        requestPrice: tempDBPost.requestPrice,
+        requestDueDate: tempDBPost.requestDueDate,
         requestOpen: 1
     })
-        .then(function (dbPost2) {
-            // res.json(dbPost2);
-            reqID = dbPost2.requestID;
-        });
-
-    db.Users.findOne({
-        where: {
-            userName: uName
-        }
+    .then(function (dbPost2) {
+        reqID = dbPost2.requestID;
+        console.log("reqID: ", reqID);
     })
-        // .then(function (dbPost) {
-        //     uID = dbPost.userID;
-        //     // tempDBPost = res.json(dbPost);
-        //     res.json(dbPost);
-        // });
+    .then(function () {
+        db.Users.findOne({
+            where: {
+                userName: uName
+            }
+        })
         .then(users => {
-            // console.log(res.json(users));
-            console.log(users.userName);
-            uID = users.userName;
+            console.log(users.userID);
+            uID = users.userID;
             console.log("uID within the then statement: ", uID);
-        })//;
-
-        .then(function () {
-            // console.log("after User findOne, uID: ", tempDBPost.uID);
-
-            console.log("uID after leaving the findOne statement: ", uID);
-            // db.RequedBies.create(tempDBPost, {
-            //     requestedByUser_userID = tempDBPost.uID,
-            //     requestedID = reqID
-            // })
-        }).then(function () {
-            db.Requests.findOne({
-                where: {
-                    requestName: tempDBPost.requestName
-                }
-            });
         })
         .then(function () {
-            reqID = requestID;
-        }).then(function () {
-            db.RequestedBy.create({
-                requestedByUser_userID: uID,
-                requestedID: reqID
+            db.Requests.findOne({
+                where: {
+                    requestName: reqName
+                }
             })
+            .then(requests => {
+                console.log(requests.requestID);
+                reqID = requests.requestID;
+                console.log("reqID within the then statement: ", reqID);
+            })
+            .then(function () {
+                db.RequestedBy.create({
+                    requestedByUser_userID: uID,
+                    requestedID: reqID
+                })
                 .then(function (dbPost3) {
-                    // console.log(res.json(dbPost3));
                     res.json(dbPost3);
-                });
-        });
+                })
+            })
+            .then(function () {
+                db.Languages.findOne({
+                    where: {
+                        langName: reqLang
+                    }
+                })
+                .then(languages => {
+                    console.log(languages.langID);
+                    lID = languages.langID;
+                    console.log("langID within the then statement: ", lID);
+                })
+                .then(function () {
+                    db.RequestLanguages.create({
+                        req_id: reqID,
+                        lang_id: lID
+                    })
+                    .then(function (dbPost4) {
+                        res.json(dbPost4);
+                    })
+                })
+            })
+        })
+    });
 });
 
 // Route to create a new user
