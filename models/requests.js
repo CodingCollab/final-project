@@ -2,7 +2,8 @@
 'use strict'
 // const User = require("./users");
 // const UserRequest = require("./userRequests");
-
+const RequestLanguages = require("./requestLanguages");
+const Languages = require("./languages");
 module.exports = (sequelize, Sequelize) => {
     const Request = sequelize.define("Requests", {
         id: {
@@ -72,6 +73,8 @@ module.exports = (sequelize, Sequelize) => {
     //     },
     //     foreignKey: "userID"
     // });
+
+    // Requests.hasMany(Languages, { /*as: req_id,*/ through: RequestLanguages, foreignKey: 'requestID' });
 
     return Request;
 };

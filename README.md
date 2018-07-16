@@ -57,7 +57,11 @@ A full stack web application designed to allow users to post coding projects whe
 
 ## Authors
 
-* **Lawrence Splaver** - [Lawrence Splaver](https://github.com/lsplaver)
-* **Matthew Skrajner** - [Matthew Skrajner](https://github.com/MattSkrajner)
-* **Brian Zuech** - [Brian Zuech](https://github.com/bdz101)
 * **Kevin Glasow** - [Kevin Glasow](https://github.com/kevinglasow)
+* **Matthew Skrajner** - [Matthew Skrajner](https://github.com/MattSkrajner)
+* **Lawrence Splaver** - [Lawrence Splaver](https://github.com/lsplaver)
+* **Brian Zuech** - [Brian Zuech](https://github.com/bdz101)
+
+## Live Version
+
+* https://codingcollab.herokuapp.com/

@@ -1,9 +1,10 @@
 'use strict'
 
 const Requests = require("./requests");
+const RequestLanguages = require("./requestLanguages");
 
 module.exports = (sequelize, Sequelize) => {
-    const Language = sequelize.define("Language", {
+    const Languages = sequelize.define("Languages", {
         langID: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -18,5 +19,7 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return Language;
+    // Languages.belongsToMany(Requests, { /*as: lang_id,*/ through: RequestLanguages, foreignKey: 'langID' });
+
+    return Languages;
 };

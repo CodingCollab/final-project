@@ -1,19 +1,18 @@
 import React, { Component } from "react";
+import { form } from "reactstrap";
 import "./NewLanguageForm.css";
+import "../Pages/style.css";
+import axios from "axios";
 
 class NewLanguageForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // error: null,
-      // isLoaded: false,
+      error: null,
+      isLoaded: false,
       langName: ""
     };
   }
-  // Setting the component's initial state
-  // state = {
-  // langName: ""
-  // };
 
   // componentDidUpdate() {
   //   fetch("newLanguage.html")
@@ -50,30 +49,23 @@ class NewLanguageForm extends Component {
     // logic
     console.log(this.state)
 
-    const myPost = {
+    axios({
       method: 'POST',
-      data: this.state
-    };
-
-    fetch("newLanguage.html", myPost)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            langName: result.langName
-          });
-        },
+      url: '/api/langpost',
+      data: {
+        langName: this.state.langName
+      }
+    })
+      .then(function (response) {
+        console.log("response: ", response);
+      },
         (error) => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
-    // this.setState({
-    //   langName: ""
-    // });
+      );
   };
 
   // begining the form
@@ -89,7 +81,7 @@ class NewLanguageForm extends Component {
       );
     }
     // else if (!isLoaded) {
-      // return <div>Currently Loading</div>
+    // return <div>Currently Loading</div>
     // }
     else {
       return (
@@ -97,15 +89,17 @@ class NewLanguageForm extends Component {
           <p>
             Please fill out the following form to submit a new language tag.
         </p>
-          <form className="form">
-            <input
-              value={this.state.langName}
-              name="langName"
-              onChange={this.handleInputChange}
-              type="text"
-              placeholder="Language Tag"
-            />
-            <button onClick={this.handleFormSubmit}>Submit</button>
+          <form className="form validate-form" onSubmit={this.handleFormSubmit}>
+            <div className="validate-input" data-validate="Must have a language">
+              <input
+                value={this.state.langName}
+                name="langName"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Language Tag"
+              />
+            </div>
+            <button id="btnSubmit">Submit</button>
           </form>
         </div>
       );

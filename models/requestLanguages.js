@@ -1,7 +1,7 @@
 'use strict'
 
-const Request = require("./requests");
-const Language = require("./languages");
+const Requests = require("./requests");
+const Languages = require("./languages");
 
 module.exports = (sequelize, Sequelize) => {
     const RequestLanguages = sequelize.define("RequestLanguages", {
@@ -23,6 +23,11 @@ module.exports = (sequelize, Sequelize) => {
             defaultValue: null
         }
     });
+
+    // Requests.hasMany(Languages, { /*as: req_id,*/ through: RequestLanguages, foreignKey: 'requestID' });
+    // Languages.belongsToMany(Requests, { /*as: lang_id,*/ through: RequestLanguages, foreignKey: 'langID' });
+
+    // Requests.addLanguages(Languages, { through: lang_id });
 
     return RequestLanguages;
 };
