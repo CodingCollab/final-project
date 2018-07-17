@@ -10,19 +10,19 @@ import {
   Jumbotron,
   Container
   } from 'reactstrap';
+  import "./Home.css";
+
 
 class Home extends Component {
   render () {
     return (
     <div>
-      <Jumbotron fluid>
-        <Container fluid>
-          <h1 className="display-3">CodeCollab</h1>
-          <p className="lead">Use your coding skills to earn quick cash - for you and for charity!</p>
-          <p className="lead">This is ugly though so it'll likely need some styling.</p>
-        </Container>
-      </Jumbotron>
+
+    <h1 className="header" >CodeCollab</h1>
+    <h4 className="subhead">Use your coding skills to earn quick cash - for you and for charity!</h4>
     
+    <br></br>
+
     <CardGroup top width="85%">
       <Card>
         <CardImg top width="100%" object-fit="cover" src="https://www.mxcursos.com/image/cache/data/Thumbs2017/javascript-cr-292x175.png" alt="Javascript" />

@@ -4,6 +4,8 @@ import {
   Input,
   Button,
  } from 'reactstrap';
+ import "./Login.css";
+
 
 class Login extends Component {
   state = {
@@ -45,7 +47,7 @@ class Login extends Component {
             type="text"
             placeholder="User Name"
           />
-          <Input
+          <input
             value={this.state.password}
             name="password"
             onChange={this.handleInputChange}
