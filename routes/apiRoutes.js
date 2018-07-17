@@ -162,15 +162,90 @@ router.get("/api/posts/language/:language", function (req, res) {
 
 // Route to get all postings by a specific user and sort by due date
 // TODO - CREATE SORT BY DUE DATE FEATURE
-router.get("/api/posts/user/:user", function (req, res) {
-    db.Post.findAll({
+router.get("/api/userget/user" /*/:user*/, /*function*/ (req, res) => {
+    // console//.debug(req.body);
+    // .log("user get req.body: ", String.toString(req.body));
+    var uID = "";
+    // console.log("uID before userget: ", uID);
+    // var tempDBPost = req.body;
+    // console.log(/*"tempDBPost before userget: ",*/ tempDBPost);
+    // var uName = tempDBPost.userName;
+    // console.log("uName before userget: ", uName);
+    var tempDBPost = req.body;
+    console.log(tempDBPost);
+    var uName = tempDBPost.userName;
+    console.log("uName before userget: ", uName);
+    console.log("uID before userget: ", uID);
+    // db.Users.findOne({
+    //     where: {
+    //         // userName: req.params.userName
+    //         userName: uName
+    //     }
+    // })
+    // .then(users => {
+    //     uID = users.userID;
+    //     console.log("uID from userget: ", uID);
+    // })
+    // db.Users.findOne({
+    //     where: {
+    //         userName: uName
+    //     }
+    // })
+    // .then(users => {
+    //     console.log(users.userID);
+    //     uID = users.userID;
+    //     console.log("uID from userget: ", uID);
+    // })
+    db.Users.findAll({
         where: {
-            user: req.params.userID
+            userID: uName
         }
     })
-        .then(function (dbPost) {
-            res.json(dbPost);
-        });
+    .then(function (users) {
+        uID = users.userID;
+        console.log(res.json(users));
+        console.log("uID in Users finadAll: ", uID);
+    })
+    // .then(function () {
+    //     db.RequestedBy.findAll({
+    //         where: {
+    //             requestedByUser_userID: uID
+    //         }
+    //     })
+    //     .then(requestedby => {
+    //         reqID = requestedby.requestedID
+    //     })
+    //     .then(function () {
+    //         db.Requests.findAll({
+    //             where: {
+    //                 requestID: reqID
+    //             }
+    //         })
+    //         .then(requests => {
+    //             reqName = requests.requestName,
+    //             reqContent = requests.requestContent,
+    //             reqOpen = requests.requestOpen,
+    //             reqCompleted = requests.requestCompleted,
+    //             reqPrice = requests.requestPrice,
+    //             reqDueDate = requests.requestDueDate,
+    //             reqCompletedDate = requests.requestCompletedDate,
+    //             reqCreatedAt = requests.createdAt,
+    //             reqUpdatedAt = requests.updatedAt
+    //         })
+    //         .then(reqInfo => {
+    //             console.log(res.json(reqInfo));
+    //         })
+    //     })
+    // })
+    // db.findAll({
+        // where: {
+            // Users.user: 
+            // user: req.params.userName // userID
+        // }
+    // })
+        // .then(function (dbPost) {
+            // res.json(dbPost);
+        // });
 });
 
 // Route to get one specific post by ID
@@ -178,6 +253,18 @@ router.get("/api/posts/:requestID", function (req, res) {
     db.Post.findOne({
         where: {
             requestID: req.params.requestID
+        }
+    })
+        .then(function (dbPost) {
+            res.json(dbPost);
+        });
+});
+
+// Route to get one specific post by Request Name
+router.get("/api/posts/:requestName", function (req, res) {
+    db.Post.findOne({
+        where: {
+            requestName: req.params.requestName
         }
     })
         .then(function (dbPost) {

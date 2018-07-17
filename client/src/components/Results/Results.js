@@ -8,7 +8,8 @@
 // =============================================================
 
 import React, { Component } from "react";
-import "../Pages/style.css"
+import "../Pages/style.css";
+import axios from "axios";
 
 // RENDERING
 // =============================================================
