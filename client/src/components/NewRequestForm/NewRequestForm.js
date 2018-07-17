@@ -5,6 +5,7 @@ import 'react-day-picker/lib/style.css';
 import { form } from "reactstrap";
 import "../Pages/style.css";
 import axios from "axios";
+import CustomModal from "../CustomModal";
 
 class NewRequestForm extends Component {
   // Setting the component's initial state
@@ -28,7 +29,8 @@ class NewRequestForm extends Component {
       requestLang: "",
       requestContent: "",
       requestPrice: "",
-      requestDueDate: undefined
+      requestDueDate: undefined,
+      tempRes: ""
     };
   }
 
@@ -53,6 +55,7 @@ class NewRequestForm extends Component {
     event.preventDefault()
     // logic
     console.log(this.state)
+    var tRes = "";
 
     axios({
       method: 'POST',
@@ -67,7 +70,11 @@ class NewRequestForm extends Component {
       }
     })
       .then(function (response) {
+        // this.setState({ tempRes: response.statusText });
         console.log("response: ", response);
+        console.log("response.statusText: ", response.statusText);
+        tRes = response.statusText;
+        console.log("tRes: ", tRes);
       },
         (error) => {
           this.setState({
@@ -76,13 +83,19 @@ class NewRequestForm extends Component {
           });
         }
       );
+
+      this.state.tempRes = tRes;
+      // console.log("tempRes: ", tempRes);
+      this.setState({ tempRes: tRes });
+      // console.log("tempRes after setState: ", tempRes);
+      console.log("this.state.tempRes after setState: ", this.state.tempRes);
   };
 
   // begining the form
 
   render() {
     //setting the day on the date picker calendar to today's date
-    const { requestDueDate, error, isLoaded, userName, requestName, requestContent, requestPrice } = this.state;
+    const { requestDueDate, error, isLoaded, userName, requestName, requestContent, requestPrice, tempRes } = this.state;
 
     if (error) {
       return (
@@ -96,6 +109,60 @@ class NewRequestForm extends Component {
     // return <div>Currently Loading</div>
     // }
     else {
+      if (tempRes === 200) {
+        CustomModal;
+        return (
+          <div>
+          <p>
+            Please fill out the following form to submit a new request.
+        </p>
+          <form className="form">
+            <input
+              value={this.state.userName}
+              name="userName"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="User Name"
+            />
+            <input
+              value={this.state.requestName}
+              name="requestName"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Request Name"
+            />
+            <input
+              value={this.state.requestLang}
+              name="requestLang"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Requested Language"
+            />
+            <input
+              value={this.state.requestContent}
+              name="requestContent"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="Describe your request here"
+            />
+            <input
+              value={this.state.requestPrice}
+              name="requestPrice"
+              onChange={this.handleInputChange}
+              type="text"
+              placeholder="How much is this worth to you?"
+            />
+            {/* enter the calendar element */}
+            <div>
+              {requestDueDate && <p>Day: {requestDueDate.toLocaleDateString()}</p>}
+              {!requestDueDate && <p>Choose a day</p>}
+              <DayPickerInput onDayChange={this.handleDayChange} />
+            </div>
+            <button onClick={this.handleFormSubmit}>Submit</button>
+          </form>
+        </div>
+        );
+      }
       return (
         <div>
           <p>
