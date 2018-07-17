@@ -109,7 +109,8 @@ class NewRequestForm extends Component {
     // return <div>Currently Loading</div>
     // }
     else {
-      if (tempRes === 200) {
+      if (tempRes === "OK") {
+        console.log("tempRes in the if statement: ", tempRes);
         CustomModal;
         return (
           <div>
