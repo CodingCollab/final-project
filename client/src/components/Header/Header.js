@@ -8,11 +8,14 @@ class Header extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
           <div className="container">
             <a className="navbar-brand" href="#">
-              <img src="https://ptpimg.me/h3q1y0.png
+              <img src="https://ptpimg.me/7a4n24.png
+
+
+
 
   
             " style={{display: 'inline-block'}} />
-              <span style={{display: 'inline-block'}}>CodingCollabs</span>
+              <span style={{display: 'inline-block'}}></span>
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon" />
