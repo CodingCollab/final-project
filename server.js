@@ -8,7 +8,7 @@ const env = require("dotenv");
 
 env.load(path.resolve('./config/config', 'config.js'));
 const routes = require ("./routes");
-const PORT = process.env.port || 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
