@@ -17,7 +17,7 @@ const db = require("../models");
 // Route for a user to complete a new post by accept input from the NewRequestForm component
 router.post("/api/reqpost", (req, res) => {
     console.log(req.body);
-    
+
     var tempDBPost = req.body;
     console.log(tempDBPost);
     var uName = tempDBPost.userName;
@@ -33,7 +33,7 @@ router.post("/api/reqpost", (req, res) => {
     var reqLang = tempDBPost.requestLang;
     console.log("reqLang: ", reqLang);
     var uID = "", reqID = "", lID = "";
-    
+
     console.log("uID: ", uID);
     console.log("reqID: ", reqID);
     console.log("lID: ", lID);
@@ -46,64 +46,64 @@ router.post("/api/reqpost", (req, res) => {
         requestDueDate: tempDBPost.requestDueDate,
         requestOpen: 1
     })
-    .then(function (dbPost2) {
-        reqID = dbPost2.requestID;
-        console.log("reqID: ", reqID);
-    })
-    .then(function () {
-        db.Users.findOne({
-            where: {
-                userName: uName
-            }
-        })
-        .then(users => {
-            console.log(users.userID);
-            uID = users.userID;
-            console.log("uID within the then statement: ", uID);
+        .then(function (dbPost2) {
+            reqID = dbPost2.requestID;
+            console.log("reqID: ", reqID);
         })
         .then(function () {
-            db.Requests.findOne({
+            db.Users.findOne({
                 where: {
-                    requestName: reqName
+                    userName: uName
                 }
             })
-            .then(requests => {
-                console.log(requests.requestID);
-                reqID = requests.requestID;
-                console.log("reqID within the then statement: ", reqID);
-            })
-            .then(function () {
-                db.RequestedBy.create({
-                    requestedByUser_userID: uID,
-                    requestedID: reqID
-                })
-                .then(function (dbPost3) {
-                    res.json(dbPost3);
-                })
-            })
-            .then(function () {
-                db.Languages.findOne({
-                    where: {
-                        langName: reqLang
-                    }
-                })
-                .then(languages => {
-                    console.log(languages.langID);
-                    lID = languages.langID;
-                    console.log("langID within the then statement: ", lID);
+                .then(users => {
+                    console.log(users.userID);
+                    uID = users.userID;
+                    console.log("uID within the then statement: ", uID);
                 })
                 .then(function () {
-                    db.RequestLanguages.create({
-                        req_id: reqID,
-                        lang_id: lID
+                    db.Requests.findOne({
+                        where: {
+                            requestName: reqName
+                        }
                     })
-                    .then(function (dbPost4) {
-                        res.json(dbPost4);
-                    })
+                        .then(requests => {
+                            console.log(requests.requestID);
+                            reqID = requests.requestID;
+                            console.log("reqID within the then statement: ", reqID);
+                        })
+                        .then(function () {
+                            db.RequestedBy.create({
+                                requestedByUser_userID: uID,
+                                requestedID: reqID
+                            })
+                                .then(function (dbPost3) {
+                                    res.json(dbPost3);
+                                })
+                        })
+                        .then(function () {
+                            db.Languages.findOne({
+                                where: {
+                                    langName: reqLang
+                                }
+                            })
+                                .then(languages => {
+                                    console.log(languages.langID);
+                                    lID = languages.langID;
+                                    console.log("langID within the then statement: ", lID);
+                                })
+                                .then(function () {
+                                    db.RequestLanguages.create({
+                                        req_id: reqID,
+                                        lang_id: lID
+                                    })
+                                        .then(function (dbPost4) {
+                                            res.json(dbPost4);
+                                        })
+                                })
+                        })
                 })
-            })
-        })
-    });
+        });
 });
 
 // Route to create a new user
@@ -162,91 +162,189 @@ router.get("/api/posts/language/:language", function (req, res) {
 
 // Route to get all postings by a specific user and sort by due date
 // TODO - CREATE SORT BY DUE DATE FEATURE
-router.get("/api/userget/user" /*/:user*/, /*function*/ (req, res) => {
-    // console//.debug(req.body);
-    // .log("user get req.body: ", String.toString(req.body));
-    var uID = "";
-    // console.log("uID before userget: ", uID);
-    // var tempDBPost = req.body;
-    // console.log(/*"tempDBPost before userget: ",*/ tempDBPost);
-    // var uName = tempDBPost.userName;
-    // console.log("uName before userget: ", uName);
-    var tempDBPost = req.body;
-    console.log(tempDBPost);
-    var uName = tempDBPost.userName;
-    console.log("uName before userget: ", uName);
-    console.log("uID before userget: ", uID);
-    // db.Users.findOne({
-    //     where: {
-    //         // userName: req.params.userName
-    //         userName: uName
-    //     }
-    // })
-    // .then(users => {
-    //     uID = users.userID;
-    //     console.log("uID from userget: ", uID);
-    // })
-    // db.Users.findOne({
-    //     where: {
-    //         userName: uName
-    //     }
-    // })
-    // .then(users => {
-    //     console.log(users.userID);
-    //     uID = users.userID;
-    //     console.log("uID from userget: ", uID);
-    // })
-    db.Users.findAll({
+
+router.get("/api/userget/", function (req, res) {
+    // db.Users.findAll({ include: [/*{ model:*/ 'Request' /*}*/, /*{ model:*/ 'RequestedBy' /*}*/] }).then(users => {
+    // console.log("req.body.searchType: ", JSON.stringify(req.body.searchType));
+    // console.log("req.body.searchTerm: ", JSON.stringify(req.body.userName)); //.searchTerm));
+    // console.log("req.body: ", JSON.stringify(req.body));
+    var tempDBPost, tempDBPost2, uID = "", reqArray = [], reqArray2 = [{}], uName;
+    tempDBPost = req.body;
+    var tempDBPost3 = req.query;
+    tempDBPost2 = JSON.stringify(req.body);
+    console.log("tempDBPost: ", tempDBPost);
+    console.log("tempDBPost2: ", tempDBPost2);
+    console.log("tempDBPost3: ", tempDBPost3);
+    console.log("tempDBPost.userName: ", tempDBPost3.userName);
+    // console.log("tempDBPost2.userName: ", tempDBPost2.)
+    uID = tempDBPost3.userName;
+    uName = tempDBPost3.userName;
+    console.log("uID before finds: ", uID);
+    console.log("tempDBPost.searchType: ", tempDBPost.searchType);
+    console.log("tempDBPost.searchTerm: ", tempDBPost.searchTerm);
+    //     db.Users.findAll({ include: [{ all: true /*, nested: true*/ }],  where: { /*userName: req.query.searchTerm*/ userName: tempDBPost3.userName } }).then(users => {
+    //         // uID = users.userID; 
+    //         // uID = tempDBPost3.userName;       
+    //         console.log("JSON.stringify(users): ", JSON.stringify(users))
+    //     console.log("uID after setting value: ", uID);
+    //     // console.log(res.json(users));
+    // }).then(db.RequestedBy.findAll({ include: [{ all: true /*, nested: true*/ }], where: { requestedByUser_userID: /*db.Users.userID*/ uID } }).then(requestedby => { console.log(JSON.stringify(requestedby)); }))
+    db.Users.findOne({
+        include: [{ all: true, nested: true }],
         where: {
-            userID: uName
+            userName: tempDBPost3.userName
         }
     })
-    .then(function (users) {
-        uID = users.userID;
-        console.log(res.json(users));
-        console.log("uID in Users finadAll: ", uID);
-    })
-    // .then(function () {
-    //     db.RequestedBy.findAll({
-    //         where: {
-    //             requestedByUser_userID: uID
-    //         }
-    //     })
-    //     .then(requestedby => {
-    //         reqID = requestedby.requestedID
-    //     })
-    //     .then(function () {
-    //         db.Requests.findAll({
-    //             where: {
-    //                 requestID: reqID
-    //             }
-    //         })
-    //         .then(requests => {
-    //             reqName = requests.requestName,
-    //             reqContent = requests.requestContent,
-    //             reqOpen = requests.requestOpen,
-    //             reqCompleted = requests.requestCompleted,
-    //             reqPrice = requests.requestPrice,
-    //             reqDueDate = requests.requestDueDate,
-    //             reqCompletedDate = requests.requestCompletedDate,
-    //             reqCreatedAt = requests.createdAt,
-    //             reqUpdatedAt = requests.updatedAt
-    //         })
-    //         .then(reqInfo => {
-    //             console.log(res.json(reqInfo));
-    //         })
-    //     })
-    // })
-    // db.findAll({
-        // where: {
-            // Users.user: 
-            // user: req.params.userName // userID
-        // }
-    // })
-        // .then(function (dbPost) {
-            // res.json(dbPost);
-        // });
+        .then(users => {
+            uID = users.userID;
+            console.log("uID after uID = users.userID: ", uID);
+            // res.json(users);
+            // json(users);
+        }).then(function () {
+
+            db.RequestedBy.findAndCountAll({ //.findAll({
+                // all: true,
+                include: [{ all: true, nested: true }],
+                where: {
+                    requestedByUser_userID: uID
+                }
+            })
+                .then((requestedby, users) => {
+                    console.log(requestedby);
+                    // console.log(users);
+                    // res.json(requestedby);
+                    // reqArray.forEach(function ())
+                    // forEach
+                    // reqArray.forEach(element => {
+                    //     console.log("element: ", element);
+                    //     reqArray[element] = requestedID[element];
+                    // });
+                    // reqArray.forEach(element => {
+                    //     console.log("reqArray[" + element + "]: ", reqArray[element]);
+                    // });
+                    console.log("requestedby.count: ", requestedby.count);
+                    // console.log("requestedby.rows: ", requestedby.rows);
+                    var tempCount = parseInt(requestedby.count);
+                    console.log("the value of tempCount: ", tempCount);
+                    for (var x = 0; x < tempCount; x++) {
+                        console.log("the value of x is: ", x);
+                        console.log("requestedID at position x: ", requestedby.rows[x].requestedID);
+                        reqArray.push(requestedby.rows[x].requestedID);
+                        // reqArray.push(requestedby.rows.RequestedBy.dataValues.requestedID);
+                    };
+                    // requestedby.rows.forEach(x => {
+                    //     console.log("the value of x is: ", x);
+                    // });
+                })
+                .then(function () {
+                    for (var y = 0; y < reqArray.length; y++) {
+                        db.Requests.findAll({
+                            include: [{ all: true, nested: true }], // [ db.RequestedBy ,  db.Users ],
+                            all: true,
+                            where: {
+                                requestID: reqArray[y]
+                            }
+                        })
+                            .then(requests => {
+                                // console.log("requests: ", requests);
+                                reqArray2.push(requests);
+                                // var x;
+                                reqArray2.forEach(x => {
+                                    //     console.log(reqArray2[x]);
+                                    // })
+                                    console.log(JSON.stringify(reqArray2[x]));
+                                });
+                            })
+                        res.json( reqArray2 ,  uName );
+                    }
+                })
+        })
 });
+// router.get("/api/userget/user" /*/:user*/, /*function*/ (req, res) => {
+//     // console//.debug(req.body);
+//     // .log("user get req.body: ", String.toString(req.body));
+//     var uID = "";
+//     // console.log("uID before userget: ", uID);
+//     // var tempDBPost = req.body;
+//     // console.log(/*"tempDBPost before userget: ",*/ tempDBPost);
+//     // var uName = tempDBPost.userName;
+//     // console.log("uName before userget: ", uName);
+//     var tempDBPost = req.body;
+//     console.log(tempDBPost);
+//     var uName = tempDBPost.userName;
+//     console.log("uName before userget: ", uName);
+//     console.log("uID before userget: ", uID);
+//     // db.Users.findOne({
+//     //     where: {
+//     //         // userName: req.params.userName
+//     //         userName: uName
+//     //     }
+//     // })
+//     // .then(users => {
+//     //     uID = users.userID;
+//     //     console.log("uID from userget: ", uID);
+//     // })
+//     // db.Users.findOne({
+//     //     where: {
+//     //         userName: uName
+//     //     }
+//     // })
+//     // .then(users => {
+//     //     console.log(users.userID);
+//     //     uID = users.userID;
+//     //     console.log("uID from userget: ", uID);
+//     // })
+//     db.Users.findAll({
+//         where: {
+//             userID: uName
+//         }
+//     })
+//     .then(function (users) {
+//         uID = users.userID;
+//         console.log(res.json(users));
+//         console.log("uID in Users finadAll: ", uID);
+//     })
+//     // .then(function () {
+//     //     db.RequestedBy.findAll({
+//     //         where: {
+//     //             requestedByUser_userID: uID
+//     //         }
+//     //     })
+//     //     .then(requestedby => {
+//     //         reqID = requestedby.requestedID
+//     //     })
+//     //     .then(function () {
+//     //         db.Requests.findAll({
+//     //             where: {
+//     //                 requestID: reqID
+//     //             }
+//     //         })
+//     //         .then(requests => {
+//     //             reqName = requests.requestName,
+//     //             reqContent = requests.requestContent,
+//     //             reqOpen = requests.requestOpen,
+//     //             reqCompleted = requests.requestCompleted,
+//     //             reqPrice = requests.requestPrice,
+//     //             reqDueDate = requests.requestDueDate,
+//     //             reqCompletedDate = requests.requestCompletedDate,
+//     //             reqCreatedAt = requests.createdAt,
+//     //             reqUpdatedAt = requests.updatedAt
+//     //         })
+//     //         .then(reqInfo => {
+//     //             console.log(res.json(reqInfo));
+//     //         })
+//     //     })
+//     // })
+//     // db.findAll({
+//         // where: {
+//             // Users.user: 
+//             // user: req.params.userName // userID
+//         // }
+//     // })
+//         // .then(function (dbPost) {
+//             // res.json(dbPost);
+//         // });
+// });
 
 // Route to get one specific post by ID
 router.get("/api/posts/:requestID", function (req, res) {

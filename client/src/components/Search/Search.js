@@ -23,13 +23,13 @@ import axios from "axios";
 // =============================================================
 // Setting empty state for the componenet 
 class searchForm extends Component {
-  state = {
-    searchType: "",
-    searchTerm: "",
-    tempUrl: "",
-    param: "",
-    paramName: ""
-  };
+  // state = {
+  //   searchType: "",
+  //   searchTerm: "",
+  //   tempUrl: "",
+  //   param: "",
+  //   paramName: ""
+  // };
 
 
   constructor(props) {
@@ -85,19 +85,21 @@ class searchForm extends Component {
 
   };
 
+  // th
+
   handleFormSubmit = event => {
 
     event.preventDefault()
     // logic
     console.log(this.state)
 
-    this.setState({
-      searchType: "", // "Search Type",
-      searchTerm: "",
-      tempUrl: "",
-      param: "",
-      paramName: ""
-    });
+    // this.setState({
+    //   searchType: "", // "Search Type",
+    //   searchTerm: "",
+    //   tempUrl: "",
+    //   param: "",
+    //   paramName: ""
+    // });
 
     var tempUrl = "", param = "", paramName = ""; //, 
     // axios(
@@ -148,18 +150,34 @@ class searchForm extends Component {
     // .then(function (response) {
     // console.log("response: ", response);
     // })
-    if (paramName === "userName") {
-      // axios({
-        // method: 'GET',
-      axios.get('/api/userget/user', {
+    console.log("this.state.searchType: ", this.state.searchType);
+    console.log("this.state.searchTerm: ", this.state.searchTerm);
+    var aSearchTerm = this.state.searchTerm, tempResponse = [{}];
+    console.log("aSearchTerm: ", aSearchTerm);
+    if (/*paramName*/ this.state.searchType === "User Name") {
+      axios({
+        method: 'GET',
+      // axios.get('/api/userget/user', {
         // url: '' // tempUrl, // '/api/posts/user',
+        url: '/api/userget/',
         params: {
-          userName: this.state.searchTerm // param
+        // data: {
+          // userName: this.state.searchTerm // param
+          userName: aSearchTerm
+          // test: "this is a test"
         }
       })
         .then(function (response) {
-          console.log(response);
-        });
+          console.log("response: ", response);
+          tempResponse = response.data;
+          return tempResponse;
+        },
+          (error) => {
+            this.setState({
+              error
+            });
+          }
+        )
       }
     else if (paramName === "requestName") {
       axios({
@@ -171,8 +189,9 @@ class searchForm extends Component {
       })
         .then(function (response) {
           console.log(response);
+          // this.loadResults(response);
         });
-      }
+    }
     else if (paramName === "langName") {
       axios({
         method: 'GET',
@@ -184,7 +203,7 @@ class searchForm extends Component {
         .then(function (response) {
           console.log(response);
         });
-      }
+    }
     // axios({
     //   method: 'GET',
     //   url: tempUrl, // '/api/posts/user',
