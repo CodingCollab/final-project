@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./NewRequestForm.css";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import { form } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "../Pages/style.css";
 import axios from "axios";
 
@@ -28,8 +28,12 @@ class NewRequestForm extends Component {
       requestLang: "",
       requestContent: "",
       requestPrice: "",
-      requestDueDate: undefined
+      requestDueDate: undefined,
+      modal: false
     };
+
+    
+    this.toggle = this.toggle.bind(this);
   }
 
   handleDayChange(day) {
@@ -53,7 +57,6 @@ class NewRequestForm extends Component {
     event.preventDefault()
     // logic
     console.log(this.state)
-
     axios({
       method: 'POST',
       url: '/api/reqpost',
@@ -66,8 +69,11 @@ class NewRequestForm extends Component {
         requestDueDate: this.state.requestDueDate
       }
     })
-      .then(function (response) {
-        console.log("response: ", response);
+      .then((response) => {
+        console.log("hit resp");
+        console.log(response.request.status);
+        this.toggle();
+        // status = response.request.status;
       },
         (error) => {
           this.setState({
@@ -77,6 +83,20 @@ class NewRequestForm extends Component {
         }
       );
   };
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      error: null,
+      isLoaded: false,
+      userName: "",
+      requestName: "",
+      requestLang: "",
+      requestContent: "",
+      requestPrice: "",
+      requestDueDate: undefined,
+    });
+  }
 
   // begining the form
 
@@ -143,8 +163,19 @@ class NewRequestForm extends Component {
               {!requestDueDate && <p>Choose a day</p>}
               <DayPickerInput onDayChange={this.handleDayChange} />
             </div>
-            <button onClick={this.handleFormSubmit}>Submit</button>
-          </form>
+            <Button onClick={this.handleFormSubmit}> 
+                Submit
+            </Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+              <ModalHeader toggle={this.toggle}>Post Successful!</ModalHeader>
+              <ModalBody>
+                This data has been posted successfully to the Database. Great job!!
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.toggle}>Okay!</Button>{' '}
+              </ModalFooter>
+            </Modal>
+         </form>
         </div>
       );
     }

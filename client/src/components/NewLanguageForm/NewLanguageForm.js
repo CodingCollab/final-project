@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { form } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "./NewLanguageForm.css";
 import "../Pages/style.css";
 import axios from "axios";
@@ -10,28 +10,13 @@ class NewLanguageForm extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      langName: ""
+      langName: "",
+      modal: false
     };
+
+    this.toggle = this.toggle.bind(this);
   }
 
-  // componentDidUpdate() {
-  //   fetch("newLanguage.html")
-  //     .then(res => res.json())
-  //     .then(
-  //       (result) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           langName: result.langName
-  //         });
-  //       },
-  //       (error) => {
-  //         this.setState({
-  //           isLoaded: true,
-  //           error
-  //         });
-  //       }
-  //     )
-  // }
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
@@ -56,8 +41,9 @@ class NewLanguageForm extends Component {
         langName: this.state.langName
       }
     })
-      .then(function (response) {
+      .then((response) => {
         console.log("response: ", response);
+        this.toggle();
       },
         (error) => {
           this.setState({
@@ -65,8 +51,15 @@ class NewLanguageForm extends Component {
             error
           });
         }
-      );
+      );      
   };
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      langName: ""
+    });
+  }
 
   // begining the form
 
@@ -80,9 +73,7 @@ class NewLanguageForm extends Component {
         </div>
       );
     }
-    // else if (!isLoaded) {
-    // return <div>Currently Loading</div>
-    // }
+
     else {
       return (
         <div>
@@ -99,7 +90,16 @@ class NewLanguageForm extends Component {
                 placeholder="Language Tag"
               />
             </div>
-            <button id="btnSubmit">Submit</button>
+            <Button id="btnSubmit">Submit</Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Post Successful!</ModalHeader>
+          <ModalBody>
+              This data has been posted successfully to the Database. Great job!!
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Okay!</Button>{' '}
+          </ModalFooter>
+        </Modal>
           </form>
         </div>
       );
