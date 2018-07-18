@@ -8,7 +8,7 @@
 // =============================================================
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Results from '../Results'
+// import Results from '../Results'
 
 // Creating the Switch for the second section of the site
 // =============================================================
@@ -17,7 +17,7 @@ import Results from '../Results'
 const Second = () => (
     <div>
         <Switch>
-            <Route path='/Search' component={ Results }/>
+            {/* <Route path='/Search' component={ Results }/> */}
         </Switch>
     </div>
 )

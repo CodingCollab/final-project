@@ -177,7 +177,9 @@ class NewRequestForm extends Component {
             </Modal>
          </form>
         </div>
+                       
       );
+
     }
   }
 }

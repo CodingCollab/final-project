@@ -88,8 +88,20 @@ class searchForm extends Component {
       searchType: "Search Type",
       searchTerm: ""
       });
+    this.displayResults();
 
   };
+
+  displayResults = event => {
+    console.log("Great Job, Kevin! This function triggered!")
+    
+    // This will contain code that will render a search result by passing the axios call 
+    // results as a prop
+
+  }
+  
+
+
 
 // RENDERING COMPONENT
 // =============================================================
@@ -118,7 +130,13 @@ class searchForm extends Component {
           />
           <InputGroupAddon addonType="append"><Button color="secondary" onClick={this.handleFormSubmit}>Search</Button></InputGroupAddon>
         </InputGroup>
+        <br />
+        <div className="resultsContainer">
+          Someday results will live here, and it will be <strong> so cool </strong>        
+        </div>
+
       </div>
+      
     );
   }
 }
