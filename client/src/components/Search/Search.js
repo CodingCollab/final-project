@@ -92,16 +92,20 @@ class searchForm extends Component {
 
   };
 
+  // This component will determine what type of search was completed and then will format that
+  // result to be rendered in the resultsContainer div
   displayResults = event => {
-    console.log("Great Job, Kevin! This function triggered!")
-    
-    // This will contain code that will render a search result by passing the axios call 
-    // results as a prop
-
+    console.log("Great Job, Kevin! This function triggered!");
+    if(this.state.searchType==="Language") {
+      console.log("Language Search")
+    } else if (this.state.searchType==="User Name") {
+      console.log("User Name Search") 
+    } else if (this.state.searchType==="Request Description") {
+      console.log("Request Description Search")
+    } else if (this.state.searchType==="All") {
+      console.log("Search All")
+    }
   }
-  
-
-
 
 // RENDERING COMPONENT
 // =============================================================

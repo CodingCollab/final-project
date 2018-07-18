@@ -15,10 +15,10 @@ import "../Pages/style.css"
 class SingleResult extends Component {
     render () {
         return (
-          <div className="home">
-            <h1>
+          <div className="singleResult">
+            <h3>
                 Request Title
-            </h1>
+            </h3>
             <ul>
                 <li>
                     Requested By:
@@ -31,6 +31,9 @@ class SingleResult extends Component {
                 </li>
                 <li>
                     Request Due Date:
+                </li>
+                <li>
+                    Requester Email:
                 </li>
             </ul>
           </div>

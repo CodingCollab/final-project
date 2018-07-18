@@ -7,8 +7,6 @@ import {
   CardText, 
   CardGroup,
   CardBody,
-  Jumbotron,
-  Container
   } from 'reactstrap';
   import "./Home.css";
 

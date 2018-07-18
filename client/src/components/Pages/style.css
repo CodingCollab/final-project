@@ -2,3 +2,7 @@ body {
     padding-top: 100px;
 }
 
+.singleResult {
+    border-bottom-style: solid;
+    /* border-width: thin */
+}
