@@ -8,11 +8,14 @@ const env = require("dotenv");
 
 env.load(path.resolve('./config/config', 'config.js'));
 const routes = require ("./routes");
+const homePath = require("./client/build/index.html");
 const PORT = process.env.PORT || 3001;
 
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 app.use(routes);
+app.get(homePath);
+
 // app.get("*", res.sendfile(path.join(__dirname, "./client/public/index.html")) );`
 // console.log(process.env)
 db.sequelize.sync().then(function() {
