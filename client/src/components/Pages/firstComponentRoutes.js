@@ -15,6 +15,7 @@ import About from '../About'
 import Search from '../Search'
 import NewLanguageForm from '../NewLanguageForm';
 import NewUserForm from '../NewUserForm';
+import ModalTest from '../ModalTest'
 
 // Creating the Switch for the main section of the site
 // =============================================================
@@ -28,6 +29,7 @@ const Main = () => (
             <Route path='/Search' component={ Search }/>
             <Route path='/NewLanguageForm' component={ NewLanguageForm }/>
             <Route path='/NewUserForm' component={ NewUserForm }/>
+            <Route path='/Modal' component={ ModalTest }/>
         </Switch>
     </main>
 )
