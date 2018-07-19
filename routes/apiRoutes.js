@@ -264,9 +264,20 @@ router.get("/api/userget/", function (req, res) {
                             console.log("JSON.stringify(requests) outside for loop: ", JSON.stringify(requests));//[y]));
                             // for (var y = 0; y < requests.length; y++) {
                                 console.log("requests.length: ", requests.length);
-                                requests.foreach(x => {
-                                    reqArray.
-                                })
+                                var tempRequestsFoundIndexes = [{}];
+                                // requests..foreach(x => {
+                                for (var x = 0; x < requests.length; x++) {
+                                    console.log("requests[" + x + "]: ", requests[x]);
+                                    if (reqArray.includes(requests[x].requestID)) {
+                                    // tempRequestsFoundIndexes.push(requests[x].findIndex(reqArray[x]));
+                                    tempRequestsFoundIndexes.push(requests[x]);
+                                    }
+                                    var t;
+                                    if (tempRequestsFoundIndexes.length > 0) {
+                                        t = tempRequestsFoundIndexes.length
+                                    }
+                                    console.log("tempRequestsFoundIndexes[" + t + "]: ", tempRequestsFoundIndexes[t]);
+                                }
                                 console.log("current value of y", y);
                                 console.log("JSON.stringify(requests) within for loop: ", JSON.stringify(requests));//[y]));
                                 console.log("requests.count: ", requests.count); //.count);
@@ -328,11 +339,13 @@ router.get("/api/userget/", function (req, res) {
                                     res.append(tempReqObj.requestPrice[y]), //;
                                     res.append(tempReqObj.requestDueDate[y]), //;
                                     res.json(tempReqObj.requestCompletedDate[y]);
-                            }
-                        })
+                            })
+                        
                 })
+            
         })
-});
+    })
+// });
 // res.json(tempReqObj[z]);
 // }
 // // res.json( reqArray2 ,  uName );
