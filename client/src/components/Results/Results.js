@@ -64,6 +64,7 @@ class Results extends Component {
         //         requestPrice: tempResponse[x].requestPrice
         //     });
         // }
+        axios.apply()
     }
 
     // console.log(Results);

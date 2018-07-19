@@ -168,20 +168,30 @@ router.get("/api/userget/", function (req, res) {
     // console.log("req.body.searchType: ", JSON.stringify(req.body.searchType));
     // console.log("req.body.searchTerm: ", JSON.stringify(req.body.userName)); //.searchTerm));
     // console.log("req.body: ", JSON.stringify(req.body));
-    var tempDBPost, tempDBPost2, uID = "", reqArray = [], reqArray2 = [{}], uName;
-    tempDBPost = req.body;
+    var tempDBPost, tempDBPost2, uID = "", reqArray = [], reqArray2 = [], uName, tempReqObj = {
+        userName: "",
+        requestName: "",
+        // requestLanguage: "",
+        requestContent: "",
+        requestOpen: 0,
+        requestCompleted: 0,
+        requestPrice: 0,
+        requestDueDate: Date,
+        requestCompletedDate: Date
+    };
+    // tempDBPost = req.body;
     var tempDBPost3 = req.query;
-    tempDBPost2 = JSON.stringify(req.body);
-    console.log("tempDBPost: ", tempDBPost);
-    console.log("tempDBPost2: ", tempDBPost2);
+    // tempDBPost2 = JSON.stringify(req.body);
+    // console.log("tempDBPost: ", tempDBPost);
+    // console.log("tempDBPost2: ", tempDBPost2);
     console.log("tempDBPost3: ", tempDBPost3);
     console.log("tempDBPost.userName: ", tempDBPost3.userName);
     // console.log("tempDBPost2.userName: ", tempDBPost2.)
     uID = tempDBPost3.userName;
     uName = tempDBPost3.userName;
     console.log("uID before finds: ", uID);
-    console.log("tempDBPost.searchType: ", tempDBPost.searchType);
-    console.log("tempDBPost.searchTerm: ", tempDBPost.searchTerm);
+    // console.log("tempDBPost.searchType: ", tempDBPost.searchType);
+    // console.log("tempDBPost.searchTerm: ", tempDBPost.searchTerm);
     //     db.Users.findAll({ include: [{ all: true /*, nested: true*/ }],  where: { /*userName: req.query.searchTerm*/ userName: tempDBPost3.userName } }).then(users => {
     //         // uID = users.userID; 
     //         // uID = tempDBPost3.userName;       
@@ -190,7 +200,7 @@ router.get("/api/userget/", function (req, res) {
     //     // console.log(res.json(users));
     // }).then(db.RequestedBy.findAll({ include: [{ all: true /*, nested: true*/ }], where: { requestedByUser_userID: /*db.Users.userID*/ uID } }).then(requestedby => { console.log(JSON.stringify(requestedby)); }))
     db.Users.findOne({
-        include: [{ all: true, nested: true }],
+        // include: [{ all: true, nested: true }],
         where: {
             userName: tempDBPost3.userName
         }
@@ -210,7 +220,7 @@ router.get("/api/userget/", function (req, res) {
                 }
             })
                 .then((requestedby, users) => {
-                    console.log(requestedby);
+                    // console.log(requestedby);
                     // console.log(users);
                     // res.json(requestedby);
                     // reqArray.forEach(function ())
@@ -237,28 +247,96 @@ router.get("/api/userget/", function (req, res) {
                     // });
                 })
                 .then(function () {
+                    console.log("reqArray.length: ", reqArray.length);
                     for (var y = 0; y < reqArray.length; y++) {
                         db.Requests.findAll({
                             include: [{ all: true, nested: true }], // [ db.RequestedBy ,  db.Users ],
                             all: true,
                             where: {
                                 requestID: reqArray[y]
+                                // requestID: reqArray.values
                             }
                         })
+
                             .then(requests => {
-                                // console.log("requests: ", requests);
-                                reqArray2.push(requests);
-                                // var x;
-                                reqArray2.forEach(x => {
+                                for (var z = 0; z < reqArray.length; z++) {
+                                    console.log("requests: ", JSON.stringify(requests));//[y]));
+                                    console.log("requests.count: ", requests.count);
+                                    console.log("requests.rows: ", requests.rows);
+                                    // reqArray2.push(requests);
+                                    reqArray2.push(requests[z]);
+                                    // var x;
+                                    // reqArray2.forEach(x => {
                                     //     console.log(reqArray2[x]);
                                     // })
-                                    console.log(JSON.stringify(reqArray2[x]));
-                                });
+                                    console.log("JSON.stringify(reqArray2[" + z + "])", JSON.stringify(reqArray2[z])); //[x]));
+                                    // res.json( reqArray2 ,  uName );
+                                    // var tempReqObj = {};
+                                    console.log("reqArray2.length: ", reqArray2.length);
+                                    var tempReqName = "", tempReqContent = "", tempReqOpen = Boolean, tempReqCompleted = Boolean, tempReqPrice = Number, tempReqDueDate = Date, tempReqCompletedDate = Date, tempReqLang = "";
+                                    tempReqName = reqArray2[z].requestName;
+                                    console.log("tempReqName = reqArray2[" + z + "].requestName", tempReqName);
+                                    tempReqContent = reqArray2[z].requestContent;
+                                    console.log("tempReqContent = reqArray2[" + z + "].requestContent", tempReqContent);
+                                    tempReqOpen = reqArray2[z].requestOpen;
+                                    console.log("tempReqOpen = reqArray2[" + z + "].requestOpen", tempReqOpen);
+                                    tempReqCompleted = reqArray2[z].requestCompleted;
+                                    console.log("tempReqCompleted = reqArray2[" + z + "].requestCompleted", tempReqCompleted);
+                                    tempReqPrice = reqArray2[z].requestPrice;
+                                    console.log("tempReqPrice = reqArray2[" + z + "].requestPrice", tempReqPrice);
+                                    tempReqDueDate = reqArray2[z].requestDueDate;
+                                    console.log("tempReqDueDate = reqArray2[" + z + "].requestDueDate", tempReqDueDate);
+                                    tempReqCompletedDate = reqArray2[z].requestCompletedDate;
+                                    console.log("tempReqCompletedDate = reqArray2[" + z + "].requestCompletedDate", tempReqCompletedDate);
+                                    // tempReqLang = reqArray2[z].reqeustLang;
+                                    // console.log("tempReqName = reqArray2[" + z + "].requestName", tempReqName);
+                                    tempReqObj = {
+                                        userName: uName,
+                                        requestName: tempReqName,
+                                        requestContent: tempReqContent,
+                                        requestOpen: tempReqOpen,
+                                        requestCompleted: tempReqCompleted,
+                                        requestPrice: tempReqPrice,
+                                        requestDueDate: tempReqDueDate,
+                                        requestCompletedDate: tempReqCompletedDate
+                                    };
+                                    // console.log("tempReqObj after setting value in foreach: ", tempReqObj.reqArray2.requests[z]);
+                                    // res.json(reqArray2).append(uName);
+                                    // res.json(tempReqObj);
+                                    // });
+                                    // // res.json( reqArray2 ,  uName );
+                                    // var tempReqObj = {};
+                                    // tempReqObj = {reqArray2, uName};
+                                    // // res.json(reqArray2).append(uName);
+                                    // res.json(tempReqObj);
+                                    // console.log("tempReqObj JSON.stringify(tempReqObj: ", JSON.stringify(tempReqObj[z]));
+                                    // res.flushHeaders;
+                                    console.log("tempReqObj:       ", JSON.stringify(tempReqObj[z]));
+                                    res.append(tempReqObj.userName[z]);
+                                    res.append(tempReqObj.requestName[z]);
+                                    res.append(tempReqObj.requestContent[z]);
+                                    res.append(tempReqObj.requestOpen[z]);
+                                    res.append(tempReqObj.requestCompleted[z]);
+                                    res.append(tempReqObj.requestPrice[z]);
+                                    res.append(tempReqObj.requestDueDate[z]);
+                                    res.json(tempReqObj.requestCompletedDate[z]);
+                                    // res.json(tempReqObj[z]);
+                                }
+                                // // res.json( reqArray2 ,  uName );
+                                // var tempReqObj = {};
+                                // tempReqObj = {reqArray2, uName};
+                                // // res.json(reqArray2).append(uName);
+                                // res.json(tempReqObj);
+                                // console.log("tempReqObj JSON.stringify(tempReqObj: ", JSON.stringify(tempReqObj));
+                                // res.flushHeaders;
+                                // res.json(tempReqObj);
                             })
-                        res.json( reqArray2 ,  uName );
+                        // res.json(tempReqObj);
                     }
                 })
+            // res.json(tempReqObj);
         })
+    // res.json(tempReqObj);
 });
 // router.get("/api/userget/user" /*/:user*/, /*function*/ (req, res) => {
 //     // console//.debug(req.body);

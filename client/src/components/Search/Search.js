@@ -152,7 +152,7 @@ class searchForm extends Component {
     // })
     console.log("this.state.searchType: ", this.state.searchType);
     console.log("this.state.searchTerm: ", this.state.searchTerm);
-    var aSearchTerm = this.state.searchTerm, tempResponse = [{}];
+    var aSearchTerm = this.state.searchTerm, tempResponse;
     console.log("aSearchTerm: ", aSearchTerm);
     if (/*paramName*/ this.state.searchType === "User Name") {
       axios({
@@ -169,8 +169,8 @@ class searchForm extends Component {
       })
         .then(function (response) {
           console.log("response: ", response);
-          tempResponse = response.data;
-          return tempResponse;
+          return tempResponse = response.data;
+          // tempResponse;
         },
           (error) => {
             this.setState({
