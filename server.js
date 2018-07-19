@@ -1,9 +1,8 @@
 const express = require ("express");
 const app = express();
 const parser = require ("body-parser");
-const db = require("./models"); //.default;
+const db = require("./models");
 const path = require("path");
-// const env = require("dotenv"); //.config("./config/config.js", "config.js"); //.load();
 const env = require("dotenv");
 
 app.use(express.static('client/build'))
@@ -16,7 +15,6 @@ app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 app.use(routes);
 
-// viewed at http://localhost:8080
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
@@ -28,4 +26,3 @@ db.sequelize.sync().then(function() {
         console.log(`listening on ${PORT}`);
     });
 });
-

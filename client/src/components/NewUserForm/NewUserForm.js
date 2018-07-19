@@ -21,32 +21,6 @@ class NewUserForm extends Component {
     this.toggle = this.toggle.bind(this);
   };
 
-  // componentDidUpdate() {
-  // fetch("/api/userpost")
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         langName: result.langName
-  //       });
-  //     },
-  //     (error) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         error
-  //       });
-  //     }
-  //   )
-  // axios.get({
-  //   method: 'GET',
-  //   url: '/api/user/getall',
-  //   data: [{
-
-  //   }]
-  // })
-  // };
-
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
     let value = event.target.value;
@@ -65,24 +39,6 @@ class NewUserForm extends Component {
 
     event.preventDefault()
 
-    /* console.log("preventDefault has triggered");
-     * logic
-     * console.log(this.state)
-     * console.log("this.state has been written to console"); */
-
-    // const myRequest = new Request("/api/userpost", {
-    //   method: 'POST',
-    //   // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
-    //   body: `{"firstName": "${this.state./*.setState(*/firstName/*)*/}", "lastName": "${this.state./*setState(*/lastName/*)*/}", "userName": "${this.state./*.setState(*/userName/*)*/}", "userPass": "${this.state./*.setState(*/userPass/*)*/}", "email": "${this.state./*setState(*/email/*)*/}"}`
-    //   // body: {"firstName": this.state.firstName, "lastName": this.state.lastName, "userName": this.state.userName, "userPass": this.state.userPass, "email": this.state.email}
-    // });
-
-    /* console.log("myRequest has been created: ", JSON.stringify(myRequest));
-     * console.log("this.state.firstName: ", this.state.firstName);
-     * console.log("this.state.lastName: ", this.state.lastName);
-     * console.log("this.state.userName: ", this.state.userName);
-     * console.log("this.state.userPass: ", this.state.userPass);
-     * console.log("this.state.email: ", this.state.email); */
     axios({
       method: 'POST',
       url: '/api/userpost',
@@ -95,7 +51,6 @@ class NewUserForm extends Component {
       }
     })
     .then((response) => {
-      console.log("response: ", response);
       this.toggle();
     },
       (error) => {
