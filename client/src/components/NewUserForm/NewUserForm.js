@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { form } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "./NewUserForm.css";
 import "../Pages/style.css";
 import axios from "axios";
@@ -14,35 +14,12 @@ class NewUserForm extends Component {
       lastName: "",
       userName: "",
       userPass: "",
-      email: ""
+      email: "",
+      modal: false
     };
+
+    this.toggle = this.toggle.bind(this);
   };
-
-  // componentDidUpdate() {
-  // fetch("/api/userpost")
-  //   .then(res => res.json())
-  //   .then(
-  //     (result) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         langName: result.langName
-  //       });
-  //     },
-  //     (error) => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         error
-  //       });
-  //     }
-  //   )
-  // axios.get({
-  //   method: 'GET',
-  //   url: '/api/user/getall',
-  //   data: [{
-
-  //   }]
-  // })
-  // };
 
   handleInputChange = event => {
     // Getting the value and name of the input which triggered the change
@@ -62,28 +39,11 @@ class NewUserForm extends Component {
 
     event.preventDefault()
 
-    /* console.log("preventDefault has triggered");
-     * logic
-     * console.log(this.state)
-     * console.log("this.state has been written to console"); */
-
-    // const myRequest = new Request("/api/userpost", {
-    //   method: 'POST',
-    //   // body: '{"firstName": ' + this.state.firstName + ', "lastName": '+ this.state.lastName + '", "userName": "this.state.userName", "userPass": "this.state.userPass", "email": "this.state.email"}'
-    //   body: `{"firstName": "${this.state./*.setState(*/firstName/*)*/}", "lastName": "${this.state./*setState(*/lastName/*)*/}", "userName": "${this.state./*.setState(*/userName/*)*/}", "userPass": "${this.state./*.setState(*/userPass/*)*/}", "email": "${this.state./*setState(*/email/*)*/}"}`
-    //   // body: {"firstName": this.state.firstName, "lastName": this.state.lastName, "userName": this.state.userName, "userPass": this.state.userPass, "email": this.state.email}
-    // });
-
-    /* console.log("myRequest has been created: ", JSON.stringify(myRequest));
-     * console.log("this.state.firstName: ", this.state.firstName);
-     * console.log("this.state.lastName: ", this.state.lastName);
-     * console.log("this.state.userName: ", this.state.userName);
-     * console.log("this.state.userPass: ", this.state.userPass);
-     * console.log("this.state.email: ", this.state.email); */
     axios({
       method: 'POST',
       url: '/api/userpost',
       data: {
+        
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         userName: this.state.userName,
@@ -91,8 +51,8 @@ class NewUserForm extends Component {
         email: this.state.email
       }
     })
-    .then(function (response) {
-      console.log("response: ", response);
+    .then((response) => {
+      this.toggle();
     },
       (error) => {
         this.setState({
@@ -102,6 +62,19 @@ class NewUserForm extends Component {
       }
     );
   };
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      error: null,
+      isLoaded: false,
+      firstName: "",
+      lastName: "",
+      userName: "",
+      userPass: "",
+      email: "",
+    });
+  }
 
   // begining the form
 
@@ -165,7 +138,16 @@ class NewUserForm extends Component {
                 placeholder="Email"
               />
             </div>
-            <button id="btnSubmit">Submit</button>
+            <Button id="btnSubmit">Submit</Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle}>Post Successful!</ModalHeader>
+          <ModalBody>
+              This data has been posted successfully to the Database. Great job!!
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggle}>Okay!</Button>{' '}
+          </ModalFooter>
+        </Modal>
           </form>
         </div>
       );

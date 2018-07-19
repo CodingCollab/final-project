@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./NewRequestForm.css";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import { form } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import "../Pages/style.css";
 import axios from "axios";
 import CustomModal from "../CustomModal";
@@ -30,8 +30,11 @@ class NewRequestForm extends Component {
       requestContent: "",
       requestPrice: "",
       requestDueDate: undefined,
-      tempRes: ""
+      modal: false
     };
+
+    
+    this.toggle = this.toggle.bind(this);
   }
 
   handleDayChange(day) {
@@ -56,7 +59,6 @@ class NewRequestForm extends Component {
     // logic
     console.log(this.state)
     var tRes = "";
-
     axios({
       method: 'POST',
       url: '/api/reqpost',
@@ -90,6 +92,20 @@ class NewRequestForm extends Component {
       // console.log("tempRes after setState: ", tempRes);
       console.log("this.state.tempRes after setState: ", this.state.tempRes);
   };
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      error: null,
+      isLoaded: false,
+      userName: "",
+      requestName: "",
+      requestLang: "",
+      requestContent: "",
+      requestPrice: "",
+      requestDueDate: undefined,
+    });
+  }
 
   // begining the form
 
@@ -211,10 +227,23 @@ class NewRequestForm extends Component {
               {!requestDueDate && <p>Choose a day</p>}
               <DayPickerInput onDayChange={this.handleDayChange} />
             </div>
-            <button onClick={this.handleFormSubmit}>Submit</button>
-          </form>
+            <Button onClick={this.handleFormSubmit}> 
+                Submit
+            </Button>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+              <ModalHeader toggle={this.toggle}>Post Successful!</ModalHeader>
+              <ModalBody>
+                This data has been posted successfully to the Database. Great job!!
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.toggle}>Okay!</Button>{' '}
+              </ModalFooter>
+            </Modal>
+         </form>
         </div>
+                       
       );
+
     }
   }
 }

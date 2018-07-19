@@ -93,13 +93,11 @@ class searchForm extends Component {
     // logic
     console.log(this.state)
 
-    // this.setState({
-    //   searchType: "", // "Search Type",
-    //   searchTerm: "",
-    //   tempUrl: "",
-    //   param: "",
-    //   paramName: ""
-    // });
+    this.setState({
+      searchType: "Search Type",
+      searchTerm: ""
+      });
+    this.displayResults();
 
     var tempUrl = "", param = "", paramName = ""; //, 
     // axios(
@@ -223,8 +221,23 @@ class searchForm extends Component {
     // });
   };
 
-  // RENDERING COMPONENT
-  // =============================================================
+  // This component will determine what type of search was completed and then will format that
+  // result to be rendered in the resultsContainer div
+  displayResults = event => {
+    console.log("Great Job, Kevin! This function triggered!");
+    if(this.state.searchType==="Language") {
+      console.log("Language Search")
+    } else if (this.state.searchType==="User Name") {
+      console.log("User Name Search") 
+    } else if (this.state.searchType==="Request Description") {
+      console.log("Request Description Search")
+    } else if (this.state.searchType==="All") {
+      console.log("Search All")
+    }
+  }
+
+// RENDERING COMPONENT
+// =============================================================
   render() {
     return (
       <div>
@@ -251,7 +264,13 @@ class searchForm extends Component {
           />
           <InputGroupAddon addonType="append"><Button color="secondary" onClick={this.handleFormSubmit}>Search</Button></InputGroupAddon>
         </InputGroup>
+        <br />
+        <div className="resultsContainer">
+          Someday results will live here, and it will be <strong> so cool </strong>        
+        </div>
+
       </div>
+      
     );
   }
 }
