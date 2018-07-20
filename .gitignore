@@ -78,7 +78,6 @@ config/config.json
 /../congig.json
 config.json
 */config.json
-db/schema.1.sql.backup
 
 *.bak
 *.backup

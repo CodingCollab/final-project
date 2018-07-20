@@ -19,25 +19,15 @@ router.post("/api/reqpost", (req, res) => {
     console.log(req.body);
 
     var tempDBPost = req.body;
-    console.log(tempDBPost);
     var uName = tempDBPost.userName;
-    console.log("uName: ", uName);
     var reqName = tempDBPost.requestName;
-    console.log("reqName: ", reqName);
     var reqContent = tempDBPost.requestContent;
-    console.log("reqContent: ", reqContent);
     var reqPrice = tempDBPost.requestPrice;
-    console.log("reqPrice: ", reqPrice);
     var reqDueDate = tempDBPost.requestDueDate;
-    console.log("reqDueDate: ", reqDueDate);
     var reqLang = tempDBPost.requestLang;
-    console.log("reqLang: ", reqLang);
     var uID = "", reqID = "", lID = "";
 
-    console.log("uID: ", uID);
-    console.log("reqID: ", reqID);
-    console.log("lID: ", lID);
-
+    // uses nested and chained database calls and then statements as workaround for sequelize associations not working correctly
     db.Requests.create({
         userName: tempDBPost.userName,
         requestName: tempDBPost.requestName,
@@ -48,7 +38,6 @@ router.post("/api/reqpost", (req, res) => {
     })
         .then(function (dbPost2) {
             reqID = dbPost2.requestID;
-            console.log("reqID: ", reqID);
         })
         .then(function () {
             db.Users.findOne({
@@ -57,9 +46,7 @@ router.post("/api/reqpost", (req, res) => {
                 }
             })
                 .then(users => {
-                    console.log(users.userID);
                     uID = users.userID;
-                    console.log("uID within the then statement: ", uID);
                 })
                 .then(function () {
                     db.Requests.findOne({
@@ -68,9 +55,7 @@ router.post("/api/reqpost", (req, res) => {
                         }
                     })
                         .then(requests => {
-                            console.log(requests.requestID);
                             reqID = requests.requestID;
-                            console.log("reqID within the then statement: ", reqID);
                         })
                         .then(function () {
                             db.RequestedBy.create({
@@ -88,9 +73,7 @@ router.post("/api/reqpost", (req, res) => {
                                 }
                             })
                                 .then(languages => {
-                                    console.log(languages.langID);
                                     lID = languages.langID;
-                                    console.log("langID within the then statement: ", lID);
                                 })
                                 .then(function () {
                                     db.RequestLanguages.create({
@@ -108,8 +91,6 @@ router.post("/api/reqpost", (req, res) => {
 
 // Route to create a new user
 router.post("/api/userpost", (req, res) => {
-    console.log(JSON.stringify(req.body));
-    console.log("firstName:", req.body.firstName);
     db.Users.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -124,8 +105,6 @@ router.post("/api/userpost", (req, res) => {
 
 // Route to create a new language tag
 router.post("/api/langpost", (req, res) => {
-    console.log(JSON.stringify(req.body));
-    console.log("langName: ", req.body.langName);
     db.Languages.create({
         langName: req.body.langName
     })
@@ -139,7 +118,6 @@ router.post("/api/langpost", (req, res) => {
 
 // Route to get all postings from the db (should not be used often outside testing)
 router.get("/api/posts", (req, res) => {
-    // db.Post.findAll({}) commented out during merge
     db.Requests.findAll({})
         .then(function (dbPost) {
             res.json(dbPost);
@@ -471,6 +449,7 @@ router.get("/api/posts/:requestName", function (req, res) {
     })
         .then(function (dbPost) {
             res.json(dbPost);
+            console.log(dbPost);
         });
 });
 

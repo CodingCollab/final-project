@@ -6,7 +6,7 @@ A full stack web application designed to allow users to post coding projects whe
 
 ## Getting Started
 - To view the live site posted via heroku: 
-    - TBD
+    - https://codingcollab.herokuapp.com/
 
 ## Technology used
 - JavaScript Libraries and packages
@@ -61,7 +61,3 @@ A full stack web application designed to allow users to post coding projects whe
 * **Matthew Skrajner** - [Matthew Skrajner](https://github.com/MattSkrajner)
 * **Lawrence Splaver** - [Lawrence Splaver](https://github.com/lsplaver)
 * **Brian Zuech** - [Brian Zuech](https://github.com/bdz101)
-
-## Live Version
-
-* https://codingcollab.herokuapp.com/

@@ -37,14 +37,6 @@ class Header extends Component {
                 <li className="nav-item">
                   <a className="nav-link" href="/NewLanguageForm">Language Form</a>
                 </li>
-                {/* <li className="nav-item">
-                  <a className="nav-link" href="newRequest.html">Request Form</a>
-                </li> */}
-                {/* from Lawrence
-                  <li className="nav-item">
-                    <a className="nav-link" href="login.html">Login/Sign Up</a>
-                  </li>
-                */}
               </ul>
             </div>
           </div>

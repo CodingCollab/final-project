@@ -33,9 +33,7 @@ class NewUserForm extends Component {
   };
 
   // create new user from form data
-  // uncomment the lines with /* */ if you need to test the route in console logs
   handleFormSubmit = event => {
-    /* console.log("The handleFormSubmit has been triggered"); */
 
     event.preventDefault()
 

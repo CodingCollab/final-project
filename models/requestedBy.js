@@ -13,12 +13,6 @@ module.exports = (sequelize, Sequelize) => {
             unique: true,
             autoIncrement: true
         },
-        // id: {
-        //     type: Sequelize.INTEGER,
-        //     allowNull: false,
-        //     primaryKey: true,
-        //     autoIncrement: true
-        // },
         requestedByUser_userID: {
             type: Sequelize.CHAR(36),
             allowNull: false

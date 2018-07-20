@@ -72,7 +72,6 @@ class NewRequestForm extends Component {
       }
     })
       .then(function (response) {
-        // this.setState({ tempRes: response.statusText });
         console.log("response: ", response);
         console.log("response.statusText: ", response.statusText);
         tRes = response.statusText;
@@ -87,9 +86,7 @@ class NewRequestForm extends Component {
       );
 
       this.state.tempRes = tRes;
-      // console.log("tempRes: ", tempRes);
       this.setState({ tempRes: tRes });
-      // console.log("tempRes after setState: ", tempRes);
       console.log("this.state.tempRes after setState: ", this.state.tempRes);
   };
 
